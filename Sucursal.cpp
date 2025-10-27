@@ -1,5 +1,6 @@
 #include "Sucursal.h"
 #include<sstream>
+// 1 rent a car, dame 3 sucursales, 30 clientes, 12 colaboradores, 30 vehiculos, 9 planteles y 60 solicitudes
 Sucursal::Sucursal() : ubicacion(""), num("") {
 	clientes = new ColeccionCliente();
 	colaboradores = new ColeccionColaborador();

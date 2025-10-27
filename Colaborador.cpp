@@ -3,7 +3,7 @@
 Colaborador::Colaborador() : id(""), nombre(""), fechaIngreso(nullptr) {
 
 }
-Colaborador::Colaborador(string id, string nom, Fecha* fecha) : id(id), nombre(nom), fechaIngreso(fechaIngreso) {
+Colaborador::Colaborador(string id, string nom, Fecha* fecha) : id(id), nombre(nom), fechaIngreso(fecha) {
 
 }
 Colaborador::~Colaborador() {
