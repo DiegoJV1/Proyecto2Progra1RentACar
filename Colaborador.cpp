@@ -7,7 +7,7 @@ Colaborador::Colaborador(string id, string nom, Fecha* fecha) : id(id), nombre(n
 
 }
 Colaborador::~Colaborador() {
-
+	delete fechaIngreso;
 }
 void Colaborador::setNombre(string nom) { this->nombre = nom; }
 void Colaborador::setId(string id) { this->id = id; }
