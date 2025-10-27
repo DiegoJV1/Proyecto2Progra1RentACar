@@ -1,0 +1,108 @@
+#include "ColeccionCliente.h"
+#include<sstream>
+ColeccionCliente::ColeccionCliente() : inicio(nullptr), actual(nullptr) {}
+ColeccionCliente::~ColeccionCliente() {
+	while (inicio) {
+		actual = inicio;
+		inicio = inicio->getSig();
+		delete actual->getObj();
+		delete actual;
+	}
+}
+void ColeccionCliente::insertarCliente(Cliente* aux) {
+	if (buscarCliente(aux->getId()) == true) { return; }
+	else {
+		NodoCliente* nuevo = new NodoCliente(aux);
+		if (!inicio) { inicio = nuevo; }
+		else {
+			actual = inicio;
+			while (actual->getSig()) {
+				actual = actual->getSig();
+			}
+			actual->setSig(nuevo);
+		}
+	}
+}
+void ColeccionCliente::eliminarCliente(string id) {
+	if (buscarCliente(id) == true) {
+		if (inicio->getObj()->getId() == id) {
+			actual = inicio;
+			inicio = inicio->getSig();
+			delete actual->getObj();
+			delete actual;
+		}
+		else {
+			actual = inicio->getSig();
+			NodoCliente* anterior = inicio;
+			while (actual) {
+				if (actual->getObj()->getId() == id) {
+					anterior->setSig(actual->getSig());
+					delete actual->getObj();
+					delete actual;
+				}
+				anterior = actual;
+				actual = actual->getSig();
+			}
+		}
+	}
+}
+bool ColeccionCliente::buscarCliente(string id) {
+	actual = inicio;
+	while (actual) {
+		if (actual->getObj()->getId() == id) {
+			return true;
+		}
+		actual = actual->getSig();
+	}
+	return false;
+}
+Cliente* ColeccionCliente::getCliente(string id) {
+	actual = inicio;
+	while (actual) {
+		if (actual->getObj()->getId() == id) {
+			return actual->getObj();
+		}
+		actual = actual->getSig();
+	}
+	return nullptr;
+}
+
+void ColeccionCliente::OrdenarClientes() {
+	if (inicio == nullptr)return;
+	NodoCliente* nuevoInicio = nullptr;
+	actual = inicio;
+	while (actual) {
+		NodoCliente* siguiente = actual->getSig();
+		if (!nuevoInicio || nuevoInicio->getObj()->getCantidadDeSolicitudes() > actual->getObj()->getCantidadDeSolicitudes()) {
+			actual->setSig(nuevoInicio);
+			nuevoInicio = actual;
+		}
+		else {
+			NodoCliente* s = nuevoInicio;
+			while (s->getSig() && s->getSig()->getObj()->getCantidadDeSolicitudes() <= actual->getObj()->getCantidadDeSolicitudes()) {
+				s = s->getSig();
+			}
+			actual->setSig(s->getSig());
+			s->setSig(actual);
+		}
+		actual = siguiente;
+	}
+	inicio = nuevoInicio;
+
+}
+string ColeccionCliente::toString() {
+	stringstream ss;
+	ss << "Lista de Clientes: " << endl;
+	actual = inicio;
+	int i = 0;
+	while (actual) {
+		ss << "Cliente #" << i << ":" << endl;
+		ss << actual->getObj()->toString() << endl;
+		actual = actual->getSig();
+		i++;
+	}
+	return ss.str();
+}
+void ColeccionCliente::ubicarInicio() { actual = inicio; }
+void ColeccionCliente::ubicarSig() { actual = actual->getSig(); }
+Cliente* ColeccionCliente::getObjActual() { return actual->getObj(); }
