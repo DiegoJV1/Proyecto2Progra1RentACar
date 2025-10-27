@@ -592,7 +592,7 @@ void Menu::ejecutar() {
 					cout << "Digite la placa del Vehiculo: " << endl;
 					cin >> placa;
 					if (negocio->getSucurales()->getSucursal(num)->getVehiculo(placa)) {
-						char estado = 'z';
+						char estado;
 						do {
 							cout << "Digite la letra del estado seleccionado del vehiculo:" << endl;
 							cout << "A-Ingreso de Vehiculo" << endl;
@@ -1016,8 +1016,8 @@ void Menu::ejecutar() {
 			}
 		}
 		case 6: {
-			while (opcion2 != 3)
-				cout << "6-Reportes de Alquileres" << endl;
+			while (opcion2 != 3){
+			cout << "6-Reportes de Alquileres" << endl;
 			cout << "1-Visualizacion de todos los contratos por sucursal(del mas reciente al mas antiguo)" << endl;
 			cout << "2-Reporte alquieleres por colaborador" << endl;
 			cout << "3-Devolverse" << endl;
