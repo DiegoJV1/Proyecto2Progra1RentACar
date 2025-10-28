@@ -27,7 +27,6 @@ void ColeccionVehiculo::eliminarVehiculo(string placa) {
 		if (inicio->getObj()->getPlaca() == placa && inicio->getObj()->getEstado() != "Alquilado") {
 			actual = inicio;
 			inicio = inicio->getSig();
-			delete actual->getObj();
 			delete actual;
 		}
 		else {
@@ -36,8 +35,8 @@ void ColeccionVehiculo::eliminarVehiculo(string placa) {
 			while (actual) {
 				if (actual->getObj()->getPlaca() == placa && actual->getObj()->getEstado() != "Alquilado") {
 					anterior->setSig(actual->getSig());
-					delete actual->getObj();
 					delete actual;
+					return;
 				}
 				anterior = actual;
 				actual = actual->getSig();

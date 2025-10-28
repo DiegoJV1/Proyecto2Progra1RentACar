@@ -27,7 +27,6 @@ void ColeccionPlantel::eliminarPlantel(string iden) {
 		if (inicio->getObj()->getIdentificacion() == iden) {
 			actual = inicio;
 			inicio = inicio->getSig();
-			delete actual->getObj();
 			delete actual;
 		}
 		else {

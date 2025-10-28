@@ -69,6 +69,7 @@ void Plantel::eliminarVehiculo(string placa) {
 		}
 	}
 }
+//corregir
 string Plantel::recomendacionDeEstacionamiento() {
 	stringstream ss;
 	int contador = 0;

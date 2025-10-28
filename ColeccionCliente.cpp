@@ -27,7 +27,6 @@ void ColeccionCliente::eliminarCliente(string id) {
 		if (inicio->getObj()->getId() == id) {
 			actual = inicio;
 			inicio = inicio->getSig();
-			delete actual->getObj();
 			delete actual;
 		}
 		else {
