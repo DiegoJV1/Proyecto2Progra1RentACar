@@ -4,7 +4,6 @@ NodoPlantel::NodoPlantel(Plantel* aux) :obj(aux), sig(nullptr) {}
 NodoPlantel::~NodoPlantel() {
 	delete obj;
 	obj = nullptr;
-	delete sig;
 	sig = nullptr;
 }
 void NodoPlantel::setObj(Plantel* aux) { this->obj = aux; }

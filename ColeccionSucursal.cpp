@@ -5,7 +5,6 @@ ColeccionSucursal::~ColeccionSucursal() {
 	while (inicio) {
 		actual = inicio;
 		inicio = inicio->getSig();
-		delete actual->getObj();
 		delete actual;
 	}
 }
@@ -28,7 +27,6 @@ void ColeccionSucursal::eliminarSucursal(string num) {
 		if (inicio->getObj()->getNum() == num) {
 			actual = inicio;
 			inicio = inicio->getSig();
-			delete actual->getObj();
 			delete actual;
 		}
 		else {
@@ -37,7 +35,6 @@ void ColeccionSucursal::eliminarSucursal(string num) {
 			while (actual) {
 				if (actual->getObj()->getNum() == num) {
 					anterior->setSig(actual->getSig());
-					delete actual->getObj();
 					delete actual;
 				}
 				anterior = actual;

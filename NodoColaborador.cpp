@@ -4,7 +4,6 @@ NodoColaborador::NodoColaborador(Colaborador* aux) :obj(aux), sig(nullptr) {}
 NodoColaborador::~NodoColaborador() {
 	delete obj;
 	obj = nullptr;
-	delete sig;
 	sig = nullptr;
 }
 void NodoColaborador::setObj(Colaborador* aux) { this->obj = aux; }

@@ -13,7 +13,6 @@ Vehiculo::Vehiculo(string placa, string modelo, string marca, char cat, string l
 }
 Vehiculo::~Vehiculo() {
 	delete bitacoraEstado;
-	bitacoraEstado = nullptr;
 }
 void Vehiculo::setPlaca(string placa) { this->placa = placa; }
 void Vehiculo::setModelo(string modelo) { this->modelo = modelo; }

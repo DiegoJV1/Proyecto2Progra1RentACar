@@ -5,7 +5,6 @@ ColeccionColaborador::~ColeccionColaborador() {
 	while (inicio) {
 		actual = inicio;
 		inicio = inicio->getSig();
-		delete actual->getObj();
 		delete actual;
 	}
 }

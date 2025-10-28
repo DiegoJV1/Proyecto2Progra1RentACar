@@ -301,6 +301,7 @@ void Menu::ejecutar() {
 				}
 				}
 			}
+			break;
 		}
 		case 2: {
 			while (opcion2 != 7) {
@@ -314,6 +315,8 @@ void Menu::ejecutar() {
 				cout << "7-Volver" << endl;
 				cout << "Digite el numero de la opcion seleccionada:" << endl;
 				cin >> opcion2;
+				system("pause");
+				system("cls");
 				switch (opcion2) {
 				case 1: {
 					string num;
@@ -364,6 +367,8 @@ void Menu::ejecutar() {
 						cout << "3-Visualizacion de Vehiculo" << endl;
 						cout << "4-Volver" << endl;
 						cin >> opcion3;
+						system("pause");
+						system("cls");
 						switch (opcion3) {
 						case 1: {
 							string num;
@@ -487,6 +492,7 @@ void Menu::ejecutar() {
 						}
 						}
 					}
+					break;
 				}
 				case 3: {
 					cout << "----Reubicacion de Vehiculo (dentro de su sucursal)----" << endl;
@@ -537,6 +543,7 @@ void Menu::ejecutar() {
 							break;
 						}
 					}
+					break;
 				}
 				case 4: {
 					string num;
@@ -576,6 +583,7 @@ void Menu::ejecutar() {
 							break;
 						}
 					}
+					break;
 				}
 				case 5: {
 					string num;
@@ -632,13 +640,14 @@ void Menu::ejecutar() {
 						break;
 					}
 				}
+				break;
 				}
 			}
+			break;
 		}
 		case 3: {
 			while (opcion2 != 5) {
 				cout << "3-Solicitudes y Contratos\n" << endl;
-
 				cout << "1-Creacion de solicitud" << endl;
 				cout << "2-Visualizacion de solicitud" << endl;
 				cout << "3-Aprobacion o rechazo de solicitud de alquiler" << endl;
@@ -646,9 +655,11 @@ void Menu::ejecutar() {
 				cout << "5-Volver" << endl;
 				cout << "Digite el numero de la opcion seleccionada:" << endl;
 				cin >> opcion2;
+				system("pause");
+				system("cls");
 				switch (opcion2) {
 				case 1: {
-					cout << "       CREACIÓN DE NUEVA SOLICITUD DE ALQUILER    " << endl;
+					cout << "----CREACIÓN DE NUEVA SOLICITUD DE ALQUILER----" << endl;
 					int dia, mes, annio;
 					cout << "Ingrese Fecha de Inicio" << endl;
 					cout << "Dia: ";
@@ -684,24 +695,32 @@ void Menu::ejecutar() {
 						cout << "ERROR: No existe la sucursal" << endl;
 						delete inicio;
 						delete entrega;
+						system("pause");
+						system("cls");
 						break;
 					}
 					if (negocio->getSucurales()->getSucursal(idSucursal)->getCliente(idCliente) == nullptr) {
 						cout << "ERROR: No existe el cliente" << endl;
 						delete inicio;
 						delete entrega;
+						system("pause");
+						system("cls");
 						break;
 					}
 					if (negocio->getSucurales()->getSucursal(idSucursal)->getColaborador(idColaborador) == nullptr) {
 						cout << "ERROR: No existe el colaborador" << endl;
 						delete inicio;
 						delete entrega;
+						system("pause");
+						system("cls");
 						break;
 					}
 					if (negocio->getSucurales()->getSucursal(idSucursal)->getVehiculo(placa) == nullptr) {
 						cout << "ERROR: No existe el vehiculo" << endl;
 						delete inicio;
 						delete entrega;
+						system("pause");
+						system("cls");
 						break;
 					}
 
@@ -722,40 +741,52 @@ void Menu::ejecutar() {
 					);
 					negocio->getSucurales()->getSucursal(idSucursal)->insertarSolicitud(nuevaSolicitud);
 					cout << "-> Solicitud:  " << codigo << " creada exitosamente (Estado: pendiente)." << endl;
+					system("pause");
+					system("cls");
 					break;
 
 				}
 				case 2: {
-					cout << "       VISUALIZACION DE SOLCITUD DE ALQUILER       " << endl;
+					cout << "----VISUALIZACION DE SOLCITUD DE ALQUILER----" << endl;
 					string cod, idSucursal;
 					cout << "ID Sucursal: ";
 					cin >> idSucursal;
 					if (negocio->getSucurales()->getSucursal(idSucursal) == nullptr) {
 						cout << "ERROR: No existe la sucursal" << endl;
+						system("pause");
+						system("cls");
 						break;
 					}
 					cout << "Digte el codigo de la solicitud de alquiler o contrato: " << endl;
 					cin >> cod;
 					if (negocio->getSucurales()->getSucursal(idSucursal)->getSolicitud(cod) == nullptr) {
 						cout << "ERROR: No existe la solicitud" << endl;
+						system("pause");
+						system("cls");
 						break;
 					}
 					cout << negocio->getSucurales()->getSucursal(idSucursal)->getSolicitud(cod)->toString();
+					system("pause");
+					system("cls");
 					break;
 				}
 				case 3: {
-					cout << "       APROBACION O RECHAZO DE SOLICITUD DE ALQUILER       " << endl;
+					cout << "----APROBACION O RECHAZO DE SOLICITUD DE ALQUILER----" << endl;
 					string cod, idSucursal;
 					cout << "ID Sucursal: ";
 					cin >> idSucursal;
 					if (negocio->getSucurales()->getSucursal(idSucursal) == nullptr) {
 						cout << "ERROR: No existe la sucursal" << endl;
+						system("pause");
+						system("cls");
 						break;
 					}
 					cout << "Digte el codigo de la solicitud de alquiler: " << endl;
 					cin >> cod;
 					if (negocio->getSucurales()->getSucursal(idSucursal)->getSolicitud(cod) == nullptr) {
 						cout << "ERROR: No existe la solicitud" << endl;
+						system("pause");
+						system("cls");
 						break;
 					}
 
@@ -765,7 +796,6 @@ void Menu::ejecutar() {
 						cout << "  CAMBIO DE ESTADO (Solicitud: " << cod << ")" << endl;
 						cout << "  Estado actual: " << solicitud->getEstado() << endl;
 						cout << "--------------------------------------------------" << endl;
-
 						cout << "Seleccione el nuevo estado:" << endl;
 						cout << "1. APROBADA" << endl;
 						cout << "2. PENDIENTE" << endl;
@@ -797,17 +827,28 @@ void Menu::ejecutar() {
 									}
 									else {
 										cout << "ERROR: Numero fuera del rango, vuelva a intentar" << endl;
+										system("pause");
+										system("cls");
+										break;
 									}
 								}
 							}
 						}
 						else {
 							cout << "ERROR: Opcion fuera de rango." << endl;
+							system("pause");
+							system("cls");
+							break;
 						}
 					}
 					else {
 						cout << "ERROR: Es un Contrato, no una Solicitud." << endl;
+						system("pause");
+						system("cls");
+						break;
 					}
+					system("pause");
+					system("cls");
 					break;
 				}
 				case 4: {
@@ -816,12 +857,16 @@ void Menu::ejecutar() {
 					cin >> idSucursal;
 					if (negocio->getSucurales()->getSucursal(idSucursal) == nullptr) {
 						cout << "ERROR: No existe la sucursal" << endl;
+						system("pause");
+						system("cls");
 						break;
 					}
 					cout << "Digte el codigo del contrato: " << endl;
 					cin >> cod;
 					if (negocio->getSucurales()->getSucursal(idSucursal)->getSolicitud(cod) == nullptr) {
 						cout << "ERROR: No existe el contrato" << endl;
+						system("pause");
+						system("cls");
 						break;
 					}
 
@@ -840,7 +885,6 @@ void Menu::ejecutar() {
 						cout << "  CAMBIO DE ESTADO (Contrato: " << cod << ")" << endl;
 						cout << "  Estado actual: " << contrato->getEstado() << endl;
 						cout << "--------------------------------------------------" << endl;
-
 						cout << "Seleccione el nuevo estado:" << endl;
 						cout << "1. Aprobado en alquiler" << endl;
 						cout << "2. Aprobado pendiente de ejecucion" << endl;
@@ -878,15 +922,24 @@ void Menu::ejecutar() {
 						}
 						else {
 							cout << "ERROR: Opcion fuera de rango." << endl;
+							system("pause");
+							system("cls");
+							break;
 						}
 					}
 					else {
 						cout << "ERROR: Es una Solicitud de alquiler no un Contrato." << endl;
+						system("pause");
+						system("cls");
+						break;
 					}
+					system("pause");
+					system("cls");
 					break;
 				}
 				}
 			}
+			break;
 		}
 		case 4: {
 			while (opcion2 != 3) {
@@ -896,6 +949,8 @@ void Menu::ejecutar() {
 				cout << "3-Devolverse" << endl;
 				cout << "Digite el numero de la opcion seleccionada:" << endl;
 				cin >> opcion2;
+				system("pause");
+				system("cls");
 				switch (opcion2) {
 				case 1: {
 					cout << "1-Historial de un cliente" << endl;
@@ -904,12 +959,16 @@ void Menu::ejecutar() {
 					cin >> idSucursal;
 					if (negocio->getSucurales()->getSucursal(idSucursal) == nullptr) {
 						cout << "ERROR: No existe la sucursal" << endl;
+						system("pause");
+						system("cls");
 						break;
 					}
 					cout << "Digte el codigo de la solicitud de alquiler: " << endl;
 					cin >> idClie;
 					if (negocio->getSucurales()->getSucursal(idSucursal)->getSolicitud(idClie) == nullptr) {
 						cout << "ERROR: No existe el Cliente" << endl;
+						system("pause");
+						system("cls");
 						break;
 					}
 					cout << negocio->getSucurales()->getSucursal(idSucursal)->getSolicitudes()->ImprimirSolicitudCliente(idClie) << endl;
@@ -924,6 +983,8 @@ void Menu::ejecutar() {
 					cin >> idSucursal;
 					if (negocio->getSucurales()->getSucursal(idSucursal) == nullptr) {
 						cout << "ERROR: No existe la sucursal" << endl;
+						system("pause");
+						system("cls");
 						break;
 					}
 					negocio->getSucurales()->getSucursal(idSucursal)->modificarContadorClientes();
@@ -935,6 +996,7 @@ void Menu::ejecutar() {
 				}
 				}
 			}
+			break;
 		}
 		case 5: {
 			opcion2 = -1;
@@ -946,6 +1008,8 @@ void Menu::ejecutar() {
 				cout << "4-Volver" << endl;
 				cout << "Digite el numero de la opcion seleccionada:" << endl;
 				cin >> opcion2;
+				system("pause");
+				system("cls");
 				switch (opcion2) {
 				case 1: {
 					cout << "1-Estados de un vehiculo especifico\n" << endl;
@@ -955,12 +1019,16 @@ void Menu::ejecutar() {
 					cin >> idSucursal;
 					if (negocio->getSucurales()->getSucursal(idSucursal) == nullptr) {
 						cout << "ERROR: No existe la sucursal" << endl;
+						system("pause");
+						system("cls");
 						break;
 					}
 					cout << "Digte el la placa del vehiculo: " << endl;
 					cin >> placa;
 					if (negocio->getSucurales()->getSucursal(idSucursal)->getVehiculo(placa) == nullptr) {
 						cout << "ERROR: No existe el Vehiculo" << endl;
+						system("pause");
+						system("cls");
 						break;
 					}
 					cout << negocio->getSucurales()->getSucursal(idSucursal)->getVehiculo(placa)->toStringBitacora();
@@ -976,12 +1044,16 @@ void Menu::ejecutar() {
 					cin >> idSucursal;
 					if (negocio->getSucurales()->getSucursal(idSucursal) == nullptr) {
 						cout << "ERROR: No existe la sucursal" << endl;
+						system("pause");
+						system("cls");
 						break;
 					}
 					cout << "Digte el la placa del vehiculo: " << endl;
 					cin >> placa;
 					if (negocio->getSucurales()->getSucursal(idSucursal)->getVehiculo(placa) == nullptr) {
 						cout << "ERROR: No existe el Vehiculo" << endl;
+						system("pause");
+						system("cls");
 						break;
 					}
 					cout << negocio->getSucurales()->getSucursal(idSucursal)->getSolicitudes()->ImprimirSolicitudVehiculo(placa);
@@ -996,6 +1068,8 @@ void Menu::ejecutar() {
 					cin >> idSucursal;
 					if (negocio->getSucurales()->getSucursal(idSucursal) == nullptr) {
 						cout << "ERROR: No existe la sucursal" << endl;
+						system("pause");
+						system("cls");
 						break;
 					}
 					cout << negocio->getSucurales()->getSucursal(idSucursal)->getPlanteles()->porcentajeDeCapacidadDeLosPlanteles();
@@ -1005,6 +1079,7 @@ void Menu::ejecutar() {
 				}
 				}
 			}
+			break;
 		}
 		case 6: {
 			while (opcion2 != 3) {
@@ -1014,6 +1089,8 @@ void Menu::ejecutar() {
 				cout << "3-Devolverse" << endl;
 				cout << "Digite el numero de la opcion seleccionada:" << endl;
 				cin >> opcion2;
+				system("pause");
+				system("cls");
 				switch (opcion2) {
 				case 1: {
 					cout << "1-Visualizacion de todos los contratos por sucursal(del mas reciente al mas antiguo)\n" << endl;
@@ -1022,6 +1099,8 @@ void Menu::ejecutar() {
 					cin >> idSucursal;
 					if (negocio->getSucurales()->getSucursal(idSucursal) == nullptr) {
 						cout << "ERROR: No existe la sucursal" << endl;
+						system("pause");
+						system("cls");
 						break;
 					}
 					negocio->getSucurales()->getSucursal(idSucursal)->getSolicitudes()->ordenarSolicitudesMenorAMayor();
@@ -1037,12 +1116,16 @@ void Menu::ejecutar() {
 					cin >> idSucursal;
 					if (negocio->getSucurales()->getSucursal(idSucursal) == nullptr) {
 						cout << "ERROR: No existe la sucursal" << endl;
+						system("pause");
+						system("cls");
 						break;
 					}
 					cout << "Digte el id del colaborador: " << endl;
 					cin >> idColaborador;
 					if (negocio->getSucurales()->getSucursal(idSucursal)->getColaborador(idColaborador) == nullptr) {
 						cout << "ERROR: No existe el Colaborador" << endl;
+						system("pause");
+						system("cls");
 						break;
 					}
 					cout << negocio->getSucurales()->getSucursal(idSucursal)->getSolicitudes()->ImprimirSolicitudColaborador(idColaborador);
@@ -1052,6 +1135,7 @@ void Menu::ejecutar() {
 				}
 				}
 			}
+			break;
 		}
 		}
 	}

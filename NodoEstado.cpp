@@ -3,12 +3,9 @@
 NodoEstado::NodoEstado() : obj(""), sig(nullptr), fechaCambio(nullptr), c(nullptr) {}
 NodoEstado::NodoEstado(string aux, Colaborador* c, Fecha* fecha) :obj(aux), sig(nullptr), fechaCambio(fecha), c(c) {}
 NodoEstado::~NodoEstado() {
-	delete sig;
 	sig = nullptr;
-	delete c;
 	c = nullptr;
 	delete fechaCambio;
-	fechaCambio = nullptr;
 }
 void NodoEstado::setObj(string aux) { this->obj = aux; }
 void NodoEstado::setSig(NodoEstado* aux) { this->sig = aux; }

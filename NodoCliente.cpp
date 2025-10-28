@@ -4,7 +4,6 @@ NodoCliente::NodoCliente(Cliente* aux) :obj(aux), sig(nullptr) {}
 NodoCliente::~NodoCliente() {
 	delete obj;
 	obj = nullptr;
-	delete sig;
 	sig = nullptr;
 }
 void NodoCliente::setObj(Cliente* aux) { this->obj = aux; }

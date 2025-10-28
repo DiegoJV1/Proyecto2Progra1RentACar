@@ -4,7 +4,6 @@ NodoVehiculo::NodoVehiculo(Vehiculo* aux) :obj(aux), sig(nullptr) {}
 NodoVehiculo::~NodoVehiculo() {
 	delete obj;
 	obj = nullptr;
-	delete sig;
 	sig = nullptr;
 }
 void NodoVehiculo::setObj(Vehiculo* aux) { this->obj = aux; }
