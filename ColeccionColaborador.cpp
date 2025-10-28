@@ -36,8 +36,8 @@ void ColeccionColaborador::eliminarColaborador(string id) {
 			while (actual) {
 				if (actual->getObj()->getId() == id) {
 					anterior->setSig(actual->getSig());
-					delete actual->getObj();
 					delete actual;
+					return;
 				}
 				anterior = actual;
 				actual = actual->getSig();

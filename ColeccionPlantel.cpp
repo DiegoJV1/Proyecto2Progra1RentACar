@@ -36,8 +36,8 @@ void ColeccionPlantel::eliminarPlantel(string iden) {
 			while (actual) {
 				if (actual->getObj()->getIdentificacion() == iden) {
 					anterior->setSig(actual->getSig());
-					delete actual->getObj();
 					delete actual;
+					return;
 				}
 				anterior = actual;
 				actual = actual->getSig();

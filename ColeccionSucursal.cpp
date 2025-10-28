@@ -36,6 +36,7 @@ void ColeccionSucursal::eliminarSucursal(string num) {
 				if (actual->getObj()->getNum() == num) {
 					anterior->setSig(actual->getSig());
 					delete actual;
+					return;
 				}
 				anterior = actual;
 				actual = actual->getSig();
