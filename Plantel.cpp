@@ -55,7 +55,10 @@ void Plantel::insertarDisponible(Vehiculo* aux) {
 		for (int j = 0; j < columnas; j++) {
 			if (!p[i][j]->getV()) {
 				p[i][j]->setV(aux);
-				p[i][j]->getV()->setUbiPlantel(p[i][j]->getCodigoNum());
+				if (p[i][j]->getV()) {
+					p[i][j]->getV()->setUbiPlantel(p[i][j]->getCodigoNum());
+				}
+				return;
 			}
 		}
 	}
@@ -63,13 +66,14 @@ void Plantel::insertarDisponible(Vehiculo* aux) {
 void Plantel::eliminarVehiculo(string placa) {
 	for (int i = 0; i < filas; i++) {
 		for (int j = 0; j < columnas; j++) {
-			if (p[i][j]->getV()->getPlaca() == placa) {
-				p[i][j]->setV(nullptr);
+			if (p[i][j]->getV() && p[i][j]->getV()->getPlaca() == placa) {
+				p[i][j]->setVNULL();
+				return;
 			}
 		}
 	}
 }
-//corregir
+
 string Plantel::recomendacionDeEstacionamiento() {
 	stringstream ss;
 	int contador = 0;
@@ -80,7 +84,7 @@ string Plantel::recomendacionDeEstacionamiento() {
 	for (int i = 0; i < filas; i++) {
 		for (int j = 0; j < columnas; j++) {
 
-			contador = 0;
+
 
 			if (i == 0 && j == 0) {
 				if (p[i][j + 1]->getEstado()) {
@@ -94,7 +98,7 @@ string Plantel::recomendacionDeEstacionamiento() {
 				}
 			}
 
-			if (i == filas-1 && j == 0) {
+			else if (i == filas-1 && j == 0) {
 				if (p[i][j + 1]->getEstado()) {
 					contador++;
 				}
@@ -106,7 +110,7 @@ string Plantel::recomendacionDeEstacionamiento() {
 				}
 			}
 
-			if (i == 0 && j == columnas-1) {
+			else if (i == 0 && j == columnas-1) {
 				if (p[i][j - 1]->getEstado()) {
 					contador++;
 				}
@@ -118,7 +122,7 @@ string Plantel::recomendacionDeEstacionamiento() {
 				}
 			}
 
-			if (i == filas-1 && j == columnas-1) {
+			else if (i == filas-1 && j == columnas-1) {
 				if (p[i - 1][j]->getEstado()) {
 					contador++;
 				}
@@ -130,7 +134,7 @@ string Plantel::recomendacionDeEstacionamiento() {
 				}
 			}
 
-			if (i == 0 && j != 0 && j != columnas-1) {
+			else if (i == 0 && j != 0 && j != columnas-1) {
 				if (p[i][j + 1]->getEstado()) {
 					contador++;
 				}
@@ -147,7 +151,7 @@ string Plantel::recomendacionDeEstacionamiento() {
 					contador++;
 				}
 			}
-			if (i != 0 && i != filas-1 && j == 0) {
+			else if (i != 0 && i != filas-1 && j == 0) {
 				if (p[i][j + 1]->getEstado()) {
 					contador++;
 				}
@@ -164,7 +168,7 @@ string Plantel::recomendacionDeEstacionamiento() {
 					contador++;
 				}
 			}
-			if (i != 0 && i != filas-1 && j == columnas-1) {
+			else if (i != 0 && i != filas-1 && j == columnas-1) {
 				if (p[i - 1][j]->getEstado()) {
 					contador++;
 				}
@@ -181,7 +185,7 @@ string Plantel::recomendacionDeEstacionamiento() {
 					contador++;
 				}
 			}
-			if (i == filas-1 && j != 0 && j == columnas-1) {
+			else if (i == filas-1 && j != 0 && j == columnas-1) {
 				if (p[i - 1][j]->getEstado()) {
 					contador++;
 				}
@@ -198,7 +202,7 @@ string Plantel::recomendacionDeEstacionamiento() {
 					contador++;
 				}
 			}
-			if (i != 0 && i != filas-1 && j != 0 && j != columnas-1) {
+			else if (i != 0 && i != filas-1 && j != 0 && j != columnas-1) {
 				if (p[i][j + 1]->getEstado()) {
 					contador++;
 				}
@@ -224,8 +228,8 @@ string Plantel::recomendacionDeEstacionamiento() {
 					contador++;
 				}
 			}
-			if (contador == 0&& !p[i][j]->getEstado()) {
-				ss << p[i][j]->getCodigo() << endl;
+			if (contador == 0 && !p[i][j]->getEstado()) {
+				ss << p[i][j]->getCodigoNum() << endl;
 				hayRecomendados++;
 			}
 			contador = 0;

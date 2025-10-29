@@ -22,5 +22,5 @@ public:
 	void setV(Vehiculo* aux);
 	Vehiculo* getV();
 	string toString();
-
+	void setVNULL();
 };

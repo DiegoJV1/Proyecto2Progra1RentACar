@@ -51,7 +51,7 @@ void Vehiculo::actualizaEstado(char est, Colaborador* c, Fecha* f) {
 		else { return; }
 	}
 	else if (bitacoraEstado->getUltimo() == "Alquilado") {
-		if (est == 'A' || est == 'C') {
+		if (est == 'C') {
 			setEstado(est, c, f);
 		}
 		else { return; }

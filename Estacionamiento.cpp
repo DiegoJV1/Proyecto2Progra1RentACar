@@ -38,6 +38,10 @@ void Estacionamiento::setV(Vehiculo* aux) {
 	this->v = aux;
 	setEstado('O');
 }
+void Estacionamiento::setVNULL() {
+	v = nullptr;
+	setEstado('D');
+}
 Vehiculo* Estacionamiento::getV() { return v; }
 string Estacionamiento::toString() {
 	stringstream ss;

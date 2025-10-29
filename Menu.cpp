@@ -433,6 +433,7 @@ void Menu::ejecutar() {
 							cin >> ubi2;
 							Vehiculo* nuevo = new Vehiculo(placa, modelo, marca, categoria, licencia);
 							negocio->getSucurales()->getSucursal(num)->getPlantel(plantel)->insertarVehiculo(nuevo, plantel, ubi1, ubi2);
+							negocio->getSucurales()->getSucursal(num)->getVehiculos()->insertarVehiculo(nuevo);
 							system("pause");
 							system("cls");
 							break;
@@ -512,15 +513,25 @@ void Menu::ejecutar() {
 						if (negocio->getSucurales()->getSucursal(num)->getVehiculo(placa)) {
 							if (negocio->getSucurales()->getSucursal(num)->getVehiculo(placa)->getEstado() != "Alquilado") {
 								Vehiculo* cambio = negocio->getSucurales()->getSucursal(num)->getVehiculo(placa);
-								string ide;
-								cout << "Digite el codigo del Plantel al que se le desea reubicar: " << endl;
-								cin >> ide;
-								if (negocio->getSucurales()->getSucursal(num)->getPlantel(ide)) {
-									negocio->getSucurales()->getSucursal(num)->getPlantel(ide)->insertarDisponible(cambio);
-									negocio->getSucurales()->getSucursal(num)->getPlantel(ide)->eliminarVehiculo(cambio->getPlaca());
-									system("pause");
-									system("cls");
-									break;
+								string ide1, ide2;
+								cout << "Digite el codigo del Plantel en el que se encuentra el vehiculo a reubicar: " << endl;
+								cin >> ide1;
+								if (negocio->getSucurales()->getSucursal(num)->getPlantel(ide1)) {
+									cout << "Digite el codigo del Plantel al que se le desea insertar el vehiculo: " << endl;
+									cin >> ide2;
+									if (negocio->getSucurales()->getSucursal(num)->getPlantel(ide2)) {
+										negocio->getSucurales()->getSucursal(num)->getPlantel(ide1)->eliminarVehiculo(cambio->getPlaca());
+										negocio->getSucurales()->getSucursal(num)->getPlantel(ide2)->insertarDisponible(cambio);
+										system("pause");
+										system("cls");
+										break;
+									}
+									else {
+										cout << "ERROR-Plantel no existente" << endl;
+										system("pause");
+										system("cls");
+										break;
+									}
 								}
 								else {
 									cout << "ERROR-Plantel no existente" << endl;
@@ -602,7 +613,7 @@ void Menu::ejecutar() {
 						char estado;
 						do {
 							cout << "Digite la letra del estado seleccionado del vehiculo:" << endl;
-							cout << "A-Ingreso de Vehiculo" << endl;
+							cout << "A-Disponible" << endl;
 							cout << "B-Mantenimiento" << endl;
 							cout << "C-Reparacion" << endl;
 							cout << "D-Disponible" << endl;
