@@ -63,15 +63,49 @@ int main() {
     char categorias[] = { 'A', 'B', 'C', 'D' };
     string licencias[] = { "A1", "B2", "C3" };
     for (int i = 0; i < 200; i++) {
-        string placa = "PLACA" + generarID("", i);
+        string placa = "PLACA" + generarID("", i + 1);
         char cat = categorias[i % 4];
         string lic = licencias[i % 3];
 
         Vehiculo* v = new Vehiculo(placa, "Modelo-" + numero(i % 5), "Marca-" + numero(i % 3), cat, lic);
 
-        if (i < 66) suc1->insertarVehiculo(v);
-        else if (i < 133) suc2->insertarVehiculo(v);
-        else suc3->insertarVehiculo(v);
+        if (i < 66) {
+            suc1->insertarVehiculo(v);
+            if (i < 22) {
+                suc1->getPlanteles()->getPlantel("P1")->insertarDisponible(v);
+            }
+            else if (i < 44) {
+                suc1->getPlanteles()->getPlantel("P2")->insertarDisponible(v);
+            }
+            else {
+                suc1->getPlanteles()->getPlantel("P3")->insertarDisponible(v);
+            }
+
+        }
+        else if (i < 133) {
+            suc2->insertarVehiculo(v);
+            if (i < 88) {
+                suc2->getPlanteles()->getPlantel("P4")->insertarDisponible(v);
+            }
+            else if (i < 110) {
+                suc2->getPlanteles()->getPlantel("P5")->insertarDisponible(v);
+            }
+            else {
+                suc2->getPlanteles()->getPlantel("P6")->insertarDisponible(v);
+            }
+        }
+        else {
+            suc3->insertarVehiculo(v);
+            if (i < 155) {
+                suc3->getPlanteles()->getPlantel("P7")->insertarDisponible(v);
+            }
+            else if (i < 177) {
+                suc3->getPlanteles()->getPlantel("P8")->insertarDisponible(v);
+            }
+            else {
+                suc3->getPlanteles()->getPlantel("P9")->insertarDisponible(v);
+            }
+        }
     }
 
     for (int i = 1; i <= 60; i++) {
