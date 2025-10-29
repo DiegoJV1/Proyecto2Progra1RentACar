@@ -44,31 +44,31 @@ void Vehiculo::setEstado(char est, Colaborador* c, Fecha* f) {
 	}
 }
 void Vehiculo::actualizaEstado(char est, Colaborador* c, Fecha* f) {
-	if (bitacoraEstado->getUltimo() == "Disponible") {
+	if (estado == "Disponible") {
 		if (est == 'B' || est == 'D' || est == 'E') {
 			setEstado(est, c, f);
 		}
 		else { return; }
 	}
-	else if (bitacoraEstado->getUltimo() == "Alquilado") {
-		if (est == 'C') {
+	else if (estado == "Alquilado") {
+		if (est == 'A' || est == 'C') {
 			setEstado(est, c, f);
 		}
 		else { return; }
 	}
-	else if (bitacoraEstado->getUltimo() == "Devuelto") {
+	else if (estado == "Devuelto") {
 		if (est == 'D' || est == 'E') {
 			setEstado(est, c, f);
 		}
 		else { return; }
 	}
-	else if (bitacoraEstado->getUltimo() == "Revision") {
+	else if (estado == "Revision") {
 		if (est == 'E') {
 			setEstado(est, c, f);
 		}
 		else { return; }
 	}
-	else if (bitacoraEstado->getUltimo() == "Lavado") {
+	else if (estado == "Lavado") {
 		if (est == 'A' || est == 'D') {
 			setEstado(est, c, f);
 		}
@@ -141,6 +141,8 @@ string Vehiculo::toString() {
 	ss << "Ubicacion en el Plantel: " << ubiPlantel << endl;
 	ss << "Tipo de licencia requerida: " << tipoLicencia << endl;
 	ss << "Estado: " << estado << endl;
+	ss << "Registro de Estados: " << endl;
+	ss << toStringBitacora();
 	ss << "Categoria: " << categoria << endl;
 	ss << "Precio Alquiler: " << PrecioAlquiler << endl;
 	return ss.str();

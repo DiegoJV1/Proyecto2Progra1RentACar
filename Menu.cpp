@@ -311,7 +311,6 @@ void Menu::ejecutar() {
 				cout << "3-Reubicacion de Vehiculo (dentro de su sucursal)" << endl;
 				cout << "4-Visualizacion de los estacionamientos" << endl;
 				cout << "5-Cambio de Estado de un Vehiculo" << endl;
-				cout << "6-Traslado de un Vehiculo (de una sucursal a otra)" << endl;
 				cout << "7-Volver" << endl;
 				cout << "Digite el numero de la opcion seleccionada:" << endl;
 				cin >> opcion2;
@@ -614,10 +613,10 @@ void Menu::ejecutar() {
 						do {
 							cout << "Digite la letra del estado seleccionado del vehiculo:" << endl;
 							cout << "A-Disponible" << endl;
-							cout << "B-Mantenimiento" << endl;
-							cout << "C-Reparacion" << endl;
-							cout << "D-Disponible" << endl;
-							cout << "E-Alquilado" << endl;
+							cout << "B-Alquilado" << endl;
+							cout << "C-Devuelto" << endl;
+							cout << "D-Revision" << endl;
+							cout << "E-Lavado" << endl;
 							cin >> estado;
 						} while (estado != 'A' && estado != 'B' && estado != 'C' && estado != 'D' && estado != 'E');
 						string id;
