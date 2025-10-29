@@ -76,8 +76,12 @@ string Plantel::recomendacionDeEstacionamiento() {
 	int hayRecomendados = 0;
 	ss << toString() << endl << endl;
 	ss << "Espacios Recomendados: " << endl;
+
 	for (int i = 0; i < filas; i++) {
 		for (int j = 0; j < columnas; j++) {
+
+			contador = 0;
+
 			if (i == 0 && j == 0) {
 				if (p[i][j + 1]->getEstado()) {
 					contador++;
@@ -89,7 +93,8 @@ string Plantel::recomendacionDeEstacionamiento() {
 					contador++;
 				}
 			}
-			if (i == filas && j == 0) {
+
+			if (i == filas-1 && j == 0) {
 				if (p[i][j + 1]->getEstado()) {
 					contador++;
 				}
@@ -100,7 +105,8 @@ string Plantel::recomendacionDeEstacionamiento() {
 					contador++;
 				}
 			}
-			if (i == 0 && j == columnas) {
+
+			if (i == 0 && j == columnas-1) {
 				if (p[i][j - 1]->getEstado()) {
 					contador++;
 				}
@@ -111,7 +117,8 @@ string Plantel::recomendacionDeEstacionamiento() {
 					contador++;
 				}
 			}
-			if (i == filas && j == columnas) {
+
+			if (i == filas-1 && j == columnas-1) {
 				if (p[i - 1][j]->getEstado()) {
 					contador++;
 				}
@@ -122,7 +129,8 @@ string Plantel::recomendacionDeEstacionamiento() {
 					contador++;
 				}
 			}
-			if (i == 0 && j != 0 && j != columnas) {
+
+			if (i == 0 && j != 0 && j != columnas-1) {
 				if (p[i][j + 1]->getEstado()) {
 					contador++;
 				}
@@ -139,7 +147,7 @@ string Plantel::recomendacionDeEstacionamiento() {
 					contador++;
 				}
 			}
-			if (i != 0 && i != filas && j == 0) {
+			if (i != 0 && i != filas-1 && j == 0) {
 				if (p[i][j + 1]->getEstado()) {
 					contador++;
 				}
@@ -156,7 +164,7 @@ string Plantel::recomendacionDeEstacionamiento() {
 					contador++;
 				}
 			}
-			if (i != 0 && i != filas && j == columnas) {
+			if (i != 0 && i != filas-1 && j == columnas-1) {
 				if (p[i - 1][j]->getEstado()) {
 					contador++;
 				}
@@ -173,7 +181,7 @@ string Plantel::recomendacionDeEstacionamiento() {
 					contador++;
 				}
 			}
-			if (i == filas && j != 0 && j == columnas) {
+			if (i == filas-1 && j != 0 && j == columnas-1) {
 				if (p[i - 1][j]->getEstado()) {
 					contador++;
 				}
@@ -190,7 +198,7 @@ string Plantel::recomendacionDeEstacionamiento() {
 					contador++;
 				}
 			}
-			if (i != 0 && i != filas && j != 0 && j != columnas) {
+			if (i != 0 && i != filas-1 && j != 0 && j != columnas-1) {
 				if (p[i][j + 1]->getEstado()) {
 					contador++;
 				}
@@ -216,7 +224,7 @@ string Plantel::recomendacionDeEstacionamiento() {
 					contador++;
 				}
 			}
-			if (contador == 0) {
+			if (contador == 0&& !p[i][j]->getEstado()) {
 				ss << p[i][j]->getCodigo() << endl;
 				hayRecomendados++;
 			}
@@ -224,7 +232,7 @@ string Plantel::recomendacionDeEstacionamiento() {
 		}
 	}
 	if (hayRecomendados == 0) {
-		cout << "No hay estacionamientos recomendados" << endl;
+		ss << "No hay estacionamientos recomendados" << endl;
 	}
 	return ss.str();
 }
