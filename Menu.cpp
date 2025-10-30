@@ -879,9 +879,7 @@ void Menu::ejecutar() {
 									else {
 										cout << "ERROR: Numero fuera del rango, vuelva a intentar" << endl;
 										system("pause");
-										system("cls");
-										break;
-									}
+										system("cls");									}
 								}
 							}
 						}
