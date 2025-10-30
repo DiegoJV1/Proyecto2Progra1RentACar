@@ -96,6 +96,12 @@
     <ClInclude Include="ContratoAlquiler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="NodoContratoAlquiler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ColeccionContratoAlquiler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Cliente.cpp">
@@ -180,6 +186,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NodoContratoAlquiler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ColeccionContratoAlquiler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

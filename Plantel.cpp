@@ -244,7 +244,7 @@ int Plantel::espaciosLibres() {
 	int contador = 0;
 	for (int i = 0; i < filas; i++) {
 		for (int j = 0; j < columnas; j++) {
-			if (!p[i][j] || p[i][j]->getEstado() == false) {
+			if (p[i][j] && p[i][j]->getEstado() == false) {
 				contador++;
 			}
 		}
@@ -285,7 +285,7 @@ Vehiculo* Plantel::buscarVehiculoPorCodigo(string cod) {
 }
 float Plantel::porcentajeOcupado() {
 	int espaciosOcupados = getCapacidad() - espaciosLibres();
-	return (espaciosOcupados / getCapacidad()) * 100;
+	return ((espaciosOcupados*100)/getCapacidad());
 }
 string Plantel::toString() {
 	stringstream ss;

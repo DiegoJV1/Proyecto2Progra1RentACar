@@ -20,7 +20,7 @@ string NodoEstado::toString() {
 	ss << "Estado: " << obj << endl;
 	if (fechaCambio && c) {
 		ss << "Fecha de Registro: " << fechaCambio << endl;
-		ss << "Encargado: " << c->toString() << endl;
+		ss << "Encargado: " << c->toString() << endl<<endl;
 	}
 	else {
 		ss << "Fecha de Registro: nulo" << endl;

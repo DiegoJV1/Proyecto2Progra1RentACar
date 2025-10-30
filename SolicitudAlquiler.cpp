@@ -66,23 +66,25 @@ void SolicitudAlquiler::setEstado(int nuevoEstado) {
         cout << "ERROR: La solicitud ha sido rechazada o anulada, ya no podra cambiar su estado" << endl;
         return;
     }
-    switch (nuevoEstado) {
-    case 1: {
-        estado = "aprobada";
-        break;
-    }
-    case 2: {
-        estado = "pendiente";
-        break;
-    }
-    case 3: {
-        estado = "rechazada";
-        break;
-    }
-    case 4: {
-        estado = "anulada";
-        break;
-    }
+    else {
+        switch (nuevoEstado) {
+            case 1: {
+                estado = "aprobada";
+                break;
+            }
+            case 2: {
+                estado = "pendiente";
+                break;
+            }
+            case 3: {
+                estado = "rechazada";
+                break;
+            }
+            case 4: {
+                estado = "anulada";
+                break;
+            }
+        }
     }
 }
 string SolicitudAlquiler::toString() {

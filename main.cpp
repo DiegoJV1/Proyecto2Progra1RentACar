@@ -19,6 +19,24 @@ int main() {
     RentACar* empresa = new RentACar();
     empresa->setNombre("Renta A Car");
 
+    //para probar
+    /*
+    Fecha* f = new Fecha(1, 2, 2020);
+    Colaborador* t1 = new Colaborador("789", "f", f);
+    Cliente* c1 = new Cliente("456", "h", "h");
+    Plantel* p1 = new Plantel("A", 1, 3, 4);
+    Sucursal* nueva = new Sucursal("H", "123");
+    nueva->insertarCliente(c1);
+    nueva->insertarColaborador(t1);
+    Vehiculo* carro = new Vehiculo("0", "f", "t", 'A', "B1");
+    p1->insertarVehiculo(carro, "A", 0, 0);
+    nueva->insertarPlantel(p1);
+    nueva->insertarVehiculo(carro);
+    empresa->insertarSucursal(nueva);
+    */
+
+
+    //tienen que ser 10 sucursales
     Sucursal* suc1 = new Sucursal("Alajuela", "S1");
     Sucursal* suc2 = new Sucursal("Cartago", "S2");
     Sucursal* suc3 = new Sucursal("Heredia", "S3");

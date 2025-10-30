@@ -10,11 +10,9 @@ public:
 	~ColeccionSolicitudAlquiler();
 	void insertarSolicitud(SolicitudAlquiler* aux);
 	SolicitudAlquiler* buscarSolicitud(string cod);
-	bool esSolicitud(string cod);
 	bool esMayorFecha(Fecha* f1, Fecha* f2);
 	bool esMenorFecha(Fecha* f1, Fecha* f2);
 	void ordenarSolicitudesMenorAMayor();
-	void cambiarAContrato(string cod);
 
 	SolicitudAlquiler* getSolicitudCliente(string id);
 	SolicitudAlquiler* getSolicitudVehiculo(string placa);

@@ -71,7 +71,7 @@ void ColeccionCliente::OrdenarClientes() {
 	actual = inicio;
 	while (actual) {
 		NodoCliente* siguiente = actual->getSig();
-		if (!nuevoInicio || nuevoInicio->getObj()->getCantidadDeSolicitudes() > actual->getObj()->getCantidadDeSolicitudes()) {
+		if (!nuevoInicio || nuevoInicio->getObj()->getCantidadDeSolicitudes() < actual->getObj()->getCantidadDeSolicitudes()) {
 			actual->setSig(nuevoInicio);
 			nuevoInicio = actual;
 		}
@@ -86,7 +86,7 @@ void ColeccionCliente::OrdenarClientes() {
 		actual = siguiente;
 	}
 	inicio = nuevoInicio;
-
+	actual = inicio;
 }
 string ColeccionCliente::toString() {
 	stringstream ss;
@@ -102,5 +102,8 @@ string ColeccionCliente::toString() {
 	return ss.str();
 }
 void ColeccionCliente::ubicarInicio() { actual = inicio; }
-void ColeccionCliente::ubicarSig() { actual = actual->getSig(); }
-Cliente* ColeccionCliente::getObjActual() { return actual->getObj(); }
+void ColeccionCliente::ubicarSig() { if (actual) { actual = actual->getSig(); } }
+Cliente* ColeccionCliente::getObjActual() {
+	if (actual) { return actual->getObj(); }
+	else { return nullptr; }
+}

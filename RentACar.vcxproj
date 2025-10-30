@@ -127,6 +127,7 @@
     <ClInclude Include="Colaborador.h" />
     <ClInclude Include="ColeccionCliente.h" />
     <ClInclude Include="ColeccionColaborador.h" />
+    <ClInclude Include="ColeccionContratoAlquiler.h" />
     <ClInclude Include="ColeccionEstado.h" />
     <ClInclude Include="ColeccionPlantel.h" />
     <ClInclude Include="ColeccionSolicitudAlquiler.h" />
@@ -138,6 +139,7 @@
     <ClInclude Include="Menu.h" />
     <ClInclude Include="NodoCliente.h" />
     <ClInclude Include="NodoColaborador.h" />
+    <ClInclude Include="NodoContratoAlquiler.h" />
     <ClInclude Include="NodoEstado.h" />
     <ClInclude Include="NodoPlantel.h" />
     <ClInclude Include="NodoSolicitudAlquiler.h" />
@@ -156,6 +158,7 @@
     <ClCompile Include="Colaborador.cpp" />
     <ClCompile Include="ColeccionCliente.cpp" />
     <ClCompile Include="ColeccionColaborador.cpp" />
+    <ClCompile Include="ColeccionContratoAlquiler.cpp" />
     <ClCompile Include="ColeccionEstado.cpp" />
     <ClCompile Include="ColeccionPlantel.cpp" />
     <ClCompile Include="ColeccionSolicitudAlquiler.cpp" />
@@ -168,6 +171,7 @@
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="NodoCliente.cpp" />
     <ClCompile Include="NodoColaborador.cpp" />
+    <ClCompile Include="NodoContratoAlquiler.cpp" />
     <ClCompile Include="NodoEstado.cpp" />
     <ClCompile Include="NodoPlantel.cpp" />
     <ClCompile Include="NodoSolicitudAlquiler.cpp" />

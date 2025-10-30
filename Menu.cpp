@@ -221,9 +221,9 @@ void Menu::ejecutar() {
 							string nom, ced;
 							int dia, mes, annio;
 							cin.ignore();
-							cout << "Digite el nombre del cliente: " << endl;
+							cout << "Digite el nombre del colaborador: " << endl;
 							getline(cin, nom);
-							cout << "Digite la identificacion del cliente: " << endl;
+							cout << "Digite la identificacion del colaborador: " << endl;
 							cin >> ced;
 							cout << "Digite el dia de la fecha de ingreso del colaborador: " << endl;
 							cin >> dia;
@@ -375,15 +375,6 @@ void Menu::ejecutar() {
 							cin >> num;
 							if (negocio->getSucurales()->buscarSucursal(num) == false) {
 								cout << "ERROR-Sucursal no existente" << endl;
-								system("pause");
-								system("cls");
-								break;
-							}
-							string ced;
-							cout << "Digite la cedula del cliente propietario del vehiculo:" << endl;
-							cin >> ced;
-							if (!negocio->getSucurales()->getSucursal(num)->getCliente(ced)) {
-								cout << "ERROR-Cliente no existente" << endl;
 								system("pause");
 								system("cls");
 								break;
@@ -657,9 +648,9 @@ void Menu::ejecutar() {
 		}
 		case 3: {
 			while (opcion2 != 5) {
-				cout << "3-Solicitudes y Contratos\n" << endl;
+				cout << "---Solicitudes y Contratos---\n" << endl;
 				cout << "1-Creacion de solicitud" << endl;
-				cout << "2-Visualizacion de solicitud" << endl;
+				cout << "2-Visualizacion de solicitud y de contratos" << endl;
 				cout << "3-Aprobacion o rechazo de solicitud de alquiler" << endl;
 				cout << "4-Recepcion del vehiculo en alquiler y finalizacion del contrato" << endl;
 				cout << "5-Volver" << endl;
@@ -669,7 +660,7 @@ void Menu::ejecutar() {
 				system("cls");
 				switch (opcion2) {
 				case 1: {
-					cout << "----CREACIÓN DE NUEVA SOLICITUD DE ALQUILER----" << endl;
+					cout << "----CREACION DE NUEVA SOLICITUD DE ALQUILER----" << endl;
 					int dia, mes, annio;
 					cout << "Ingrese Fecha de Inicio" << endl;
 					cout << "Dia: ";
@@ -679,7 +670,7 @@ void Menu::ejecutar() {
 					cout << "Anio: ";
 					cin >> annio;
 					Fecha* inicio = new Fecha(dia, mes, annio);
-					cout << "Ingrese Fecha de Entrga" << endl;
+					cout << "Ingrese Fecha de Entrega" << endl;
 					cout << "Dia: ";
 					cin >> dia;
 					cout << "Mes: ";
@@ -690,7 +681,6 @@ void Menu::ejecutar() {
 
 					string codigo, idCliente, idColaborador, idSucursal, placa;
 					int canDias;
-					float precioDia;
 					cout << "Codigo (ID Unico): ";
 					cin >> codigo;
 					cout << "ID Cliente: ";
@@ -736,8 +726,7 @@ void Menu::ejecutar() {
 
 					cout << "Cantidad de Dias de Alquiler: ";
 					cin >> canDias;
-					cout << "Precio por Dia de Alquiler: ";
-					cin >> precioDia;
+					double precioDia = negocio->getSucurales()->getSucursal(idSucursal)->getVehiculo(placa)->getPrecioAlquiler();
 					SolicitudAlquiler* nuevaSolicitud = new SolicitudAlquiler(
 						codigo,
 						idCliente,
@@ -757,27 +746,68 @@ void Menu::ejecutar() {
 
 				}
 				case 2: {
-					cout << "----VISUALIZACION DE SOLCITUD DE ALQUILER----" << endl;
-					string cod, idSucursal;
-					cout << "ID Sucursal: ";
-					cin >> idSucursal;
-					if (negocio->getSucurales()->getSucursal(idSucursal) == nullptr) {
-						cout << "ERROR: No existe la sucursal" << endl;
+					int opcion8 = 0;
+					while (opcion8 != 3) {
+						cout << "----VISUALIZACION DE SOLCITUD DE ALQUILER Y DE CONTRATOS DE ALQUILER----" << endl;
+						cout << "1-Visualizacion de solicitud" << endl;
+						cout << "2-Visualizacion de contrato" << endl;
+						cout << "3-Volver" << endl;
+						cin >> opcion8;
 						system("pause");
 						system("cls");
-						break;
+						switch (opcion8) {
+						case 1: {
+							string cod, idSucursal;
+							cout << "ID Sucursal: ";
+							cin >> idSucursal;
+							if (negocio->getSucurales()->getSucursal(idSucursal) == nullptr) {
+								cout << "ERROR: No existe la sucursal" << endl;
+								system("pause");
+								system("cls");
+								break;
+							}
+							cout << "Digte el codigo de la solicitud de alquiler: " << endl;
+							cin >> cod;
+							if (negocio->getSucurales()->getSucursal(idSucursal)->getSolicitud(cod)) {
+								cout << negocio->getSucurales()->getSucursal(idSucursal)->getSolicitud(cod)->toString();
+								system("pause");
+								system("cls");
+								break;
+							}
+							else{
+								cout << "ERROR: No existe la solicitud" << endl;
+								system("pause");
+								system("cls");
+								break;
+							}
+						}
+						case 2: {
+							string cod, idSucursal;
+							cout << "ID Sucursal: ";
+							cin >> idSucursal;
+							if (negocio->getSucurales()->getSucursal(idSucursal) == nullptr) {
+								cout << "ERROR: No existe la sucursal" << endl;
+								system("pause");
+								system("cls");
+								break;
+							}
+							cout << "Digte el codigo de la solicitud de alquiler: " << endl;
+							cin >> cod;
+							if (negocio->getSucurales()->getSucursal(idSucursal)->getContrato(cod)) {
+								cout << negocio->getSucurales()->getSucursal(idSucursal)->getContrato(cod)->toString();
+								system("pause");
+								system("cls");
+								break;
+							}
+							else {
+								cout << "ERROR: No existe el contrato" << endl;
+								system("pause");
+								system("cls");
+								break;
+							}
+						}
+						}
 					}
-					cout << "Digte el codigo de la solicitud de alquiler o contrato: " << endl;
-					cin >> cod;
-					if (negocio->getSucurales()->getSucursal(idSucursal)->getSolicitud(cod) == nullptr) {
-						cout << "ERROR: No existe la solicitud" << endl;
-						system("pause");
-						system("cls");
-						break;
-					}
-					cout << negocio->getSucurales()->getSucursal(idSucursal)->getSolicitud(cod)->toString();
-					system("pause");
-					system("cls");
 					break;
 				}
 				case 3: {
@@ -800,7 +830,7 @@ void Menu::ejecutar() {
 						break;
 					}
 
-					if (negocio->getSucurales()->getSucursal(idSucursal)->getSolicitudes()->esSolicitud(cod)) {
+					if (negocio->getSucurales()->getSucursal(idSucursal)->getSolicitud(cod)) {
 						SolicitudAlquiler* solicitud = negocio->getSucurales()->getSucursal(idSucursal)->getSolicitud(cod);
 						int estado = -1;
 						cout << "  CAMBIO DE ESTADO (Solicitud: " << cod << ")" << endl;
@@ -819,8 +849,19 @@ void Menu::ejecutar() {
 							system("pause");
 							system("cls");
 							if (solicitud->getEstado() == "aprobada") {
-								negocio->getSucurales()->getSucursal(idSucursal)->getSolicitudes()->cambiarAContrato(cod);
+								ContratoAlquiler* contrato = new ContratoAlquiler(
+									negocio->getSucurales()->getSucursal(idSucursal)->getSolicitud(cod)->getCodigo(),
+									negocio->getSucurales()->getSucursal(idSucursal)->getSolicitud(cod)->getIdCliente(),
+									negocio->getSucurales()->getSucursal(idSucursal)->getSolicitud(cod)->getIdColaborador(),
+									negocio->getSucurales()->getSucursal(idSucursal)->getSolicitud(cod)->getIdSucursal(),
+									negocio->getSucurales()->getSucursal(idSucursal)->getSolicitud(cod)->getPlaca(),
+									negocio->getSucurales()->getSucursal(idSucursal)->getSolicitud(cod)->getCanDias(),
+									negocio->getSucurales()->getSucursal(idSucursal)->getSolicitud(cod)->getInicio(),
+									negocio->getSucurales()->getSucursal(idSucursal)->getSolicitud(cod)->getEntrega(),
+									negocio->getSucurales()->getSucursal(idSucursal)->getSolicitud(cod)->getPrecioDia());
+								negocio->getSucurales()->getSucursal(idSucursal)->insertarContrato(contrato);
 								bool cambioRealizado = false;
+								int estado2;
 								while (!cambioRealizado) {
 									cout << "La Solicitud ha pasado a ser un Contrato" << endl;
 									cout << "Actualice el estado del contrato\n" << endl;
@@ -828,9 +869,9 @@ void Menu::ejecutar() {
 									cout << "1. Aprobado en alquiler" << endl;
 									cout << "2. Aprobado pendiente de ejecucion" << endl;
 									cout << "Opcion: ";
-									cin >> estado;
-									if (estado == 1 || estado == 2) {
-										solicitud->setEstado(estado);
+									cin >> estado2;
+									if (estado2 == 1 || estado2 == 2) {
+										contrato->setEstado(estado2);
 										cambioRealizado = true;
 										system("pause");
 										system("cls");
@@ -873,60 +914,49 @@ void Menu::ejecutar() {
 					}
 					cout << "Digte el codigo del contrato: " << endl;
 					cin >> cod;
-					if (negocio->getSucurales()->getSucursal(idSucursal)->getSolicitud(cod) == nullptr) {
+					if (negocio->getSucurales()->getSucursal(idSucursal)->getContrato(cod) == nullptr) {
 						cout << "ERROR: No existe el contrato" << endl;
 						system("pause");
 						system("cls");
 						break;
 					}
 
-					if (!negocio->getSucurales()->getSucursal(idSucursal)->getSolicitudes()->esSolicitud(cod)) {
-						ContratoAlquiler* contrato = new ContratoAlquiler(
-							negocio->getSucurales()->getSucursal(idSucursal)->getSolicitud(cod)->getCodigo(),
-							negocio->getSucurales()->getSucursal(idSucursal)->getSolicitud(cod)->getIdCliente(),
-							negocio->getSucurales()->getSucursal(idSucursal)->getSolicitud(cod)->getIdColaborador(),
-							negocio->getSucurales()->getSucursal(idSucursal)->getSolicitud(cod)->getIdSucursal(),
-							negocio->getSucurales()->getSucursal(idSucursal)->getSolicitud(cod)->getPlaca(),
-							negocio->getSucurales()->getSucursal(idSucursal)->getSolicitud(cod)->getCanDias(),
-							negocio->getSucurales()->getSucursal(idSucursal)->getSolicitud(cod)->getInicio(),
-							negocio->getSucurales()->getSucursal(idSucursal)->getSolicitud(cod)->getEntrega(),
-							negocio->getSucurales()->getSucursal(idSucursal)->getSolicitud(cod)->getPrecioDia());
+					if (negocio->getSucurales()->getSucursal(idSucursal)->getContrato(cod)) {
+
 						int estado = -1;
 						cout << "  CAMBIO DE ESTADO (Contrato: " << cod << ")" << endl;
-						cout << "  Estado actual: " << contrato->getEstado() << endl;
+						cout << "  Estado actual: " << negocio->getSucurales()->getSucursal(idSucursal)->getContrato(cod)->getEstado() << endl;
 						cout << "--------------------------------------------------" << endl;
 						cout << "Seleccione el nuevo estado:" << endl;
-						cout << "1. Aprobado en alquiler" << endl;
-						cout << "2. Aprobado pendiente de ejecucion" << endl;
 						cout << "3. Finalizado con multa" << endl;
 						cout << "4. Finalizado con reintegro" << endl;
 						cout << "5. Finalizado sin vargos adicionales" << endl;
 						cout << "Opcion: ";
 						cin >> estado;
-						if (estado >= 1 && estado <= 5) {
-							contrato->setEstado(estado);
-							cout << "-> Estado actualizado a: " << contrato->getEstado() << endl;
+						if (estado >= 3 && estado <= 5) {
+							negocio->getSucurales()->getSucursal(idSucursal)->getContrato(cod)->setEstado(estado);
+							cout << "-> Estado actualizado a: " << negocio->getSucurales()->getSucursal(idSucursal)->getContrato(cod)->getEstado() << endl;
 							if (estado == 3) {
 								double diasDeMas = -1;
 								while (diasDeMas < 1) {
 									double precioDia, precioActual, precioMas;
 									cout << "Digite cuantos dias de mas uso el vehiculo: ";
 									cin >> diasDeMas;
-									precioDia = contrato->getPrecioDia();
-									precioActual = contrato->getPrecioTotal();
+									precioDia = negocio->getSucurales()->getSucursal(idSucursal)->getContrato(cod)->getPrecioDia();
+									precioActual = negocio->getSucurales()->getSucursal(idSucursal)->getContrato(cod)->getPrecioTotal();
 									precioMas = diasDeMas * (precioDia * 1.3);
-									contrato->setPrecioTotal(precioActual + precioMas);
+									negocio->getSucurales()->getSucursal(idSucursal)->getContrato(cod)->setPrecioTotal(precioActual + precioMas);
 								}
 							}
-							if (estado == 4) {
+							else if (estado == 4) {
 								double diasDeMenos = -1;
 								while (diasDeMenos < 1) {
 									double precioDia, precioActual, precioMenos;
 									cout << "Digite cuantos dias de menos uso el vehiculo: "; cin >> diasDeMenos;
-									precioDia = contrato->getPrecioDia();
-									precioActual = contrato->getPrecioTotal();
+									precioDia = negocio->getSucurales()->getSucursal(idSucursal)->getContrato(cod)->getPrecioDia();
+									precioActual = negocio->getSucurales()->getSucursal(idSucursal)->getContrato(cod)->getPrecioTotal();
 									precioMenos = diasDeMenos * (precioDia * 0.7);
-									contrato->setPrecioTotal(precioActual - precioMenos);
+									negocio->getSucurales()->getSucursal(idSucursal)->getContrato(cod)->setPrecioTotal(precioActual - precioMenos);
 								}
 							}
 						}
@@ -953,7 +983,7 @@ void Menu::ejecutar() {
 		}
 		case 4: {
 			while (opcion2 != 3) {
-				cout << "4-Reportes de Cliente\n" << endl;
+				cout << "----Reportes de Cliente----\n" << endl;
 				cout << "1-Historial de un cliente" << endl;
 				cout << "2-Reporte de clientes por cantidad de contratos" << endl;
 				cout << "3-Devolverse" << endl;
@@ -963,7 +993,7 @@ void Menu::ejecutar() {
 				system("cls");
 				switch (opcion2) {
 				case 1: {
-					cout << "1-Historial de un cliente" << endl;
+					cout << "---Historial de un cliente---" << endl;
 					string idClie, idSucursal;
 					cout << "ID Sucursal: ";
 					cin >> idSucursal;
@@ -973,21 +1003,24 @@ void Menu::ejecutar() {
 						system("cls");
 						break;
 					}
-					cout << "Digte el codigo de la solicitud de alquiler: " << endl;
+					cout << "Digte la cedula del cliente: " << endl;
 					cin >> idClie;
-					if (negocio->getSucurales()->getSucursal(idSucursal)->getSolicitud(idClie) == nullptr) {
+					if (negocio->getSucurales()->getSucursal(idSucursal)->getCliente(idClie) == nullptr) {
 						cout << "ERROR: No existe el Cliente" << endl;
 						system("pause");
 						system("cls");
 						break;
 					}
+					cout << "---Historial de Solicitudes---" << endl;
 					cout << negocio->getSucurales()->getSucursal(idSucursal)->getSolicitudes()->ImprimirSolicitudCliente(idClie) << endl;
+					cout << "---Historial de Contratos---" << endl;
+					cout << negocio->getSucurales()->getSucursal(idSucursal)->getContratos()->ImprimirContratoCliente(idClie) << endl;
 					system("pause");
 					system("cls");
 					break;
 				}
 				case 2: {
-					cout << "2-Reporte de clientes por cantidad de contratos" << endl;
+					cout << "----Reporte de clientes por cantidad de contratos----" << endl;
 					string idSucursal;
 					cout << "ID Sucursal: ";
 					cin >> idSucursal;
@@ -999,7 +1032,8 @@ void Menu::ejecutar() {
 					}
 					negocio->getSucurales()->getSucursal(idSucursal)->modificarContadorClientes();
 					negocio->getSucurales()->getSucursal(idSucursal)->getClientes()->OrdenarClientes();
-					cout << negocio->getSucurales()->getSucursal(idSucursal)->getClientes()->toString();
+					cout << "----Reporte----" << endl;
+					cout << negocio->getSucurales()->getSucursal(idSucursal)->imprimirClientesYContratos();
 					system("pause");
 					system("cls");
 					break;
@@ -1011,7 +1045,7 @@ void Menu::ejecutar() {
 		case 5: {
 			opcion2 = -1;
 			while (opcion2 != 4) {
-				cout << "5-Reportes de Planteles y Vehiculos\n" << endl;
+				cout << "----Reportes de Planteles y Vehiculos----\n" << endl;
 				cout << "1-Estados de un vehiculo especifico" << endl;
 				cout << "2-Reportes de contratos para un vehiculo especifico" << endl;
 				cout << "3-Reporte de porcentaje de ocupacion de los planteles" << endl;
@@ -1022,7 +1056,7 @@ void Menu::ejecutar() {
 				system("cls");
 				switch (opcion2) {
 				case 1: {
-					cout << "1-Estados de un vehiculo especifico\n" << endl;
+					cout << "---Estados de un vehiculo especifico----\n" << endl;
 
 					string placa, idSucursal;
 					cout << "ID Sucursal: ";
@@ -1047,7 +1081,7 @@ void Menu::ejecutar() {
 					break;
 				}
 				case 2: {
-					cout << "2-Reportes de contratos para un vehiculo especifico\n" << endl;
+					cout << "----Reportes de contratos para un vehiculo especifico----\n" << endl;
 
 					string placa, idSucursal;
 					cout << "ID Sucursal: ";
@@ -1066,13 +1100,13 @@ void Menu::ejecutar() {
 						system("cls");
 						break;
 					}
-					cout << negocio->getSucurales()->getSucursal(idSucursal)->getSolicitudes()->ImprimirSolicitudVehiculo(placa);
+					cout << negocio->getSucurales()->getSucursal(idSucursal)->getContratos()->ImprimirContratoVehiculo(placa);
 					system("pause");
 					system("cls");
 					break;
 				}
 				case 3: {
-					cout << "3-Reporte de porcentaje de ocupacion de los planteles\n" << endl;
+					cout << "----Reporte de porcentaje de ocupacion de los planteles----\n" << endl;
 					string plantel, idSucursal;
 					cout << "ID Sucursal: ";
 					cin >> idSucursal;
@@ -1093,7 +1127,7 @@ void Menu::ejecutar() {
 		}
 		case 6: {
 			while (opcion2 != 3) {
-				cout << "6-Reportes de Alquileres" << endl;
+				cout << "----Reportes de Alquileres----" << endl;
 				cout << "1-Visualizacion de todos los contratos por sucursal(del mas reciente al mas antiguo)" << endl;
 				cout << "2-Reporte alquieleres por colaborador" << endl;
 				cout << "3-Devolverse" << endl;
@@ -1103,7 +1137,7 @@ void Menu::ejecutar() {
 				system("cls");
 				switch (opcion2) {
 				case 1: {
-					cout << "1-Visualizacion de todos los contratos por sucursal(del mas reciente al mas antiguo)\n" << endl;
+					cout << "----Visualizacion de todos los contratos por sucursal(del mas reciente al mas antiguo)----\n" << endl;
 					string idSucursal;
 					cout << "ID Sucursal: ";
 					cin >> idSucursal;
@@ -1120,7 +1154,7 @@ void Menu::ejecutar() {
 					break;
 				}
 				case 2: {
-					cout << "2-Reporte alquileres por colaborador" << endl;
+					cout << "----Reporte alquileres por colaborador----" << endl;
 					string idColaborador, idSucursal;
 					cout << "ID Sucursal: ";
 					cin >> idSucursal;
@@ -1138,7 +1172,8 @@ void Menu::ejecutar() {
 						system("cls");
 						break;
 					}
-					cout << negocio->getSucurales()->getSucursal(idSucursal)->getSolicitudes()->ImprimirSolicitudColaborador(idColaborador);
+					cout << negocio->getSucurales()->getSucursal(idSucursal)->getColaborador(idColaborador) << endl;
+					cout << negocio->getSucurales()->getSucursal(idSucursal)->getContratos()->ImprimirContratoColaborador(idColaborador);
 					system("pause");
 					system("cls");
 					break;
