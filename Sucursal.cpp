@@ -66,22 +66,14 @@ void Sucursal::insertarColaborador(Colaborador* aux) {
 	}
 }
 void Sucursal::insertarSolicitud(SolicitudAlquiler* aux) {
-	if (solicitudes) {
-		solicitudes = new ColeccionSolicitudAlquiler();
-		solicitudes->insertarSolicitud(aux);
-	}
-	else {
-		solicitudes->insertarSolicitud(aux);
-	}
+	solicitudes->insertarSolicitud(aux);
+	getCliente(aux->getIdCliente())->aumentaContador();
 }
+
 void Sucursal::insertarContrato(ContratoAlquiler* aux) {
-	if (contratos) {
-		contratos = new ColeccionContratoAlquiler();
-		contratos->insertarContrato(aux);
-	}
-	else {
-		contratos->insertarContrato(aux);
-	}
+	contratos->insertarContrato(aux);
+	getCliente(aux->getIdCliente())->aumentaContador();
+
 }
 
 void Sucursal::eliminarCliente(string id) {
@@ -168,6 +160,7 @@ string Sucursal::imprimirClientesYContratos() {
 	while (clientes->getObjActual()) {
 		ss << "ID: "<<clientes->getObjActual()->getId() << endl;
 		ss << "Nombre: "<<clientes->getObjActual()->getNombre() << endl;
+		ss << "Cantidad de Contratos: " << clientes->getObjActual()->getCantidadDeSolicitudes() << endl;
 		contratos->ubicarInicio();
 		while (contratos->getObjActual()) {
 			if (contratos->getObjActual()->getIdCliente() == clientes->getObjActual()->getId()) {

@@ -130,10 +130,10 @@ int main() {
     for (int i = 1; i <= 400; i++) {
 		//Los vehiculos tienen placa del 1 al 400, y se llaman en el menu con ese numero
         string placa = numero(i);
-        char cat = categorias[i % 4];
-        string lic = licencias[i % 3];
+        char cat = categorias[(i - 1) % 4];
+        string lic = licencias[(i - 1) % 3];
 
-        Vehiculo* v = new Vehiculo(placa, "Modelo-" + numero(i % 10), marcas[i%3], cat, lic);
+        Vehiculo* v = new Vehiculo(placa, "Modelo-" + numero((i -1)% 10), marcas[(i - 1) %3], cat, lic);
 
         if (i <= 40) {
             suc1->insertarVehiculo(v);
@@ -253,58 +253,167 @@ int main() {
         else if (i <= 18) suc9->insertarColaborador(col);
         else suc10->insertarColaborador(col);
     }
-    for (int i = 1; i <= 100; i++) {
-        string cod = numero(i);
-        string idCte = numero(i);
 
-        string idCol = numero((i - 1) % 20 + 1);
+    int i_global = 1;
+    int cliente = 1;
+
+    for (int i = 1; i <= 10; i++) {
+        string cod = numero(i_global);
+        string idCte = numero(cliente);
+
         string placa = numero(i);
+        string idCol = numero(1);
 
         Fecha* inicio = new Fecha(10, 10, 2025);
         Fecha* entrega = new Fecha(15, 10, 2025);
+        SolicitudAlquiler* sol = new SolicitudAlquiler(cod, idCte, idCol, "1", placa, 5, inicio, entrega, 25000.0);
+        suc1->insertarSolicitud(sol);
+        i_global++;
+        cliente++;
+    }
 
-        SolicitudAlquiler* sol = new SolicitudAlquiler(cod, idCte, idCol, "", placa, 5, inicio, entrega, 25000.0);
+    cliente = 31;
+    for (int i = 41; i <= 50; i++) {
+        string cod = numero(i_global);
+        string idCte = numero(cliente);
 
-        if (i <= 10) {
-            sol->setIdSucursal("1"); 
-            suc1->insertarSolicitud(sol);
-        }
-        else if (i <= 20) {
-            sol->setIdSucursal("2");
-            suc2->insertarSolicitud(sol);
-        }
-        else if (i <= 30) {
-            sol->setIdSucursal("3");
-            suc3->insertarSolicitud(sol);
-        }
-        else if (i <= 40) {
-            sol->setIdSucursal("4");
-            suc4->insertarSolicitud(sol);
-        }
-        else if (i <= 50) {
-            sol->setIdSucursal("5");
-            suc5->insertarSolicitud(sol);
-        }
-        else if (i <= 60) {
-            sol->setIdSucursal("6");
-            suc6->insertarSolicitud(sol);
-        }
-        else if (i <= 70) {
-            sol->setIdSucursal("7");
-            suc7->insertarSolicitud(sol);
-        }
-        else if (i <= 80) {
-            sol->setIdSucursal("8");
-            suc8->insertarSolicitud(sol);
-        }
-        else if (i <= 90) {
-            sol->setIdSucursal("9");
-            suc9->insertarSolicitud(sol);
-        }
-        else {
-            sol->setIdSucursal("10");
-            suc10->insertarSolicitud(sol);
-        }
+        string placa = numero(i);
+        string idCol = numero(6);
+
+        Fecha* inicio = new Fecha(10, 10, 2025);
+        Fecha* entrega = new Fecha(15, 10, 2025);
+        SolicitudAlquiler* sol = new SolicitudAlquiler(cod, idCte, idCol, "2", placa, 5, inicio, entrega, 25000.0);
+        suc2->insertarSolicitud(sol);
+        i_global++;
+        cliente++;
+    }
+
+    cliente = 61;
+    for (int i = 81; i <= 90; i++) {
+        string cod = numero(i_global);
+        string idCte = numero(cliente);
+
+        string placa = numero(i);
+        string idCol = numero(11);
+
+        Fecha* inicio = new Fecha(10, 10, 2025);
+        Fecha* entrega = new Fecha(15, 10, 2025);
+        SolicitudAlquiler* sol = new SolicitudAlquiler(cod, idCte, idCol, "3", placa, 5, inicio, entrega, 25000.0);
+        suc3->insertarSolicitud(sol);
+        i_global++;
+        cliente++;
+    }
+
+    cliente = 91;
+    for (int i = 121; i <= 130; i++) {
+        string cod = numero(i_global);
+        string idCte = numero(cliente);
+
+        string placa = numero(i);
+        string idCol = numero(16);
+
+        Fecha* inicio = new Fecha(10, 10, 2025);
+        Fecha* entrega = new Fecha(15, 10, 2025);
+        SolicitudAlquiler* sol = new SolicitudAlquiler(cod, idCte, idCol, "4", placa, 5, inicio, entrega, 25000.0);
+        suc4->insertarSolicitud(sol);
+        i_global++;
+        cliente++;
+    }
+
+    cliente = 121;
+    for (int i = 161; i <= 170; i++) {
+        string cod = numero(i_global);
+        string idCte = numero(cliente);
+
+        string placa = numero(i);
+        string idCol = numero(21);
+
+        Fecha* inicio = new Fecha(10, 10, 2025);
+        Fecha* entrega = new Fecha(15, 10, 2025);
+        SolicitudAlquiler* sol = new SolicitudAlquiler(cod, idCte, idCol, "5", placa, 5, inicio, entrega, 25000.0);
+        suc5->insertarSolicitud(sol);
+        i_global++;
+        cliente++;
+    }
+
+    cliente = 151;
+    for (int i = 201; i <= 210; i++) {
+        string cod = numero(i_global);
+        string idCte = numero(cliente);
+
+        string placa = numero(i);
+        string idCol = numero(26);
+
+        Fecha* inicio = new Fecha(10, 10, 2025);
+        Fecha* entrega = new Fecha(15, 10, 2025);
+        SolicitudAlquiler* sol = new SolicitudAlquiler(cod, idCte, idCol, "6", placa, 5, inicio, entrega, 25000.0);
+        suc6->insertarSolicitud(sol);
+        i_global++;
+        cliente++;
+    }
+
+    cliente = 181;
+    for (int i = 241; i <= 250; i++) {
+        string cod = numero(i_global);
+        string idCte = numero(cliente);
+
+        string placa = numero(i);
+        string idCol = numero(31);
+
+        Fecha* inicio = new Fecha(10, 10, 2025);
+        Fecha* entrega = new Fecha(15, 10, 2025);
+        SolicitudAlquiler* sol = new SolicitudAlquiler(cod, idCte, idCol, "7", placa, 5, inicio, entrega, 25000.0);
+        suc7->insertarSolicitud(sol);
+        i_global++;
+        cliente++;
+    }
+
+    cliente = 211;
+    for (int i = 281; i <= 290; i++) {
+        string cod = numero(i_global);
+        string idCte = numero(cliente);
+
+        string placa = numero(i);
+        string idCol = numero(36);
+
+        Fecha* inicio = new Fecha(10, 10, 2025);
+        Fecha* entrega = new Fecha(15, 10, 2025);
+        SolicitudAlquiler* sol = new SolicitudAlquiler(cod, idCte, idCol, "8", placa, 5, inicio, entrega, 25000.0);
+        suc8->insertarSolicitud(sol);
+        i_global++;
+        cliente++;
+    }
+
+    cliente = 241;
+    for (int i = 321; i <= 330; i++) {
+        string cod = numero(i_global);
+        string idCte = numero(cliente);
+
+        string placa = numero(i);
+        string idCol = numero(41);
+
+        Fecha* inicio = new Fecha(10, 10, 2025);
+        Fecha* entrega = new Fecha(15, 10, 2025);
+        SolicitudAlquiler* sol = new SolicitudAlquiler(cod, idCte, idCol, "9", placa, 5, inicio, entrega, 25000.0);
+        suc9->insertarSolicitud(sol);
+        i_global++;
+        cliente++;
+    }
+
+    cliente = 271;
+    for (int i = 361; i <= 370; i++) {
+        string cod = numero(i_global);
+        string idCte = numero(cliente);
+
+        string placa = numero(i);
+        string idCol = numero(46);
+
+        Fecha* inicio = new Fecha(10, 10, 2025);
+        Fecha* entrega = new Fecha(15, 10, 2025);
+        SolicitudAlquiler* sol = new SolicitudAlquiler(cod, idCte, idCol, "10", placa, 5, inicio, entrega, 25000.0);
+        suc10->insertarSolicitud(sol);
+        i_global++;
+        cliente++;
     }
 
     Menu* menu = new Menu(empresa);

@@ -1049,7 +1049,7 @@ void Menu::ejecutar() {
 				cout << "1-Estados de un vehiculo especifico" << endl;
 				cout << "2-Reportes de contratos para un vehiculo especifico" << endl;
 				cout << "3-Reporte de porcentaje de ocupacion de los planteles" << endl;
-				cout << "4-Volver" << endl;
+				cout << "4.Volver" << endl;
 				cout << "Digite el numero de la opcion seleccionada:" << endl;
 				cin >> opcion2;
 				system("pause");
@@ -1057,7 +1057,6 @@ void Menu::ejecutar() {
 				switch (opcion2) {
 				case 1: {
 					cout << "---Estados de un vehiculo especifico----\n" << endl;
-
 					string placa, idSucursal;
 					cout << "ID Sucursal: ";
 					cin >> idSucursal;
@@ -1100,7 +1099,9 @@ void Menu::ejecutar() {
 						system("cls");
 						break;
 					}
-					cout << negocio->getSucurales()->getSucursal(idSucursal)->getContratos()->ImprimirContratoVehiculo(placa);
+
+					cout << negocio->getSucurales()->getSucursal(idSucursal)->getSolicitudes()->ImprimirSolicitudVehiculo(placa);
+
 					system("pause");
 					system("cls");
 					break;
@@ -1147,7 +1148,9 @@ void Menu::ejecutar() {
 						system("cls");
 						break;
 					}
-					negocio->getSucurales()->getSucursal(idSucursal)->getSolicitudes()->ordenarSolicitudesMenorAMayor();
+
+					negocio->getSucurales()->getSucursal(idSucursal)->getSolicitudes()->ordenarSolicitudesMayorAMenor();
+
 					cout << negocio->getSucurales()->getSucursal(idSucursal)->getSolicitudes()->toString();
 					system("pause");
 					system("cls");
@@ -1172,8 +1175,11 @@ void Menu::ejecutar() {
 						system("cls");
 						break;
 					}
-					cout << negocio->getSucurales()->getSucursal(idSucursal)->getColaborador(idColaborador) << endl;
-					cout << negocio->getSucurales()->getSucursal(idSucursal)->getContratos()->ImprimirContratoColaborador(idColaborador);
+
+					cout << negocio->getSucurales()->getSucursal(idSucursal)->getColaborador(idColaborador)->toString() << endl;
+
+					cout << negocio->getSucurales()->getSucursal(idSucursal)->getSolicitudes()->ImprimirSolicitudColaborador(idColaborador);
+
 					system("pause");
 					system("cls");
 					break;
