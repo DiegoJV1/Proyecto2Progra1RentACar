@@ -29,7 +29,7 @@ int main() {
     nueva->insertarCliente(c1);
     nueva->insertarColaborador(t1);
     Vehiculo* carro = new Vehiculo("0", "f", "t", 'A', "B1");
-    p1->insertarVehiculo(carro, "A", 0, 0);
+    p1->insertarVehiculo(carro, 0, 0);
     nueva->insertarPlantel(p1);
     nueva->insertarVehiculo(carro);
     empresa->insertarSucursal(nueva);

@@ -422,7 +422,7 @@ void Menu::ejecutar() {
 							cout << "Digite el indice de la columna del estacionamiento: " << endl;
 							cin >> ubi2;
 							Vehiculo* nuevo = new Vehiculo(placa, modelo, marca, categoria, licencia);
-							negocio->getSucurales()->getSucursal(num)->getPlantel(plantel)->insertarVehiculo(nuevo, plantel, ubi1, ubi2);
+							negocio->getSucurales()->getSucursal(num)->getPlantel(plantel)->insertarVehiculo(nuevo, ubi1, ubi2);
 							negocio->getSucurales()->getSucursal(num)->getVehiculos()->insertarVehiculo(nuevo);
 							system("pause");
 							system("cls");
@@ -873,7 +873,7 @@ void Menu::ejecutar() {
 									cout << "Opcion: ";
 									cin >> estado2;
 									if (estado2 == 1 || estado2 == 2) {
-										negocio->getSucurales()->getSucursal(idSucursal)->getVehiculo(contrato->getPlaca())->setEstado('B', negocio->getSucurales()->getSucursal(idSucursal)->getColaborador(contrato->getIdColaborador()), contrato->getInicio());
+										negocio->getSucurales()->getSucursal(idSucursal)->getVehiculo(contrato->getPlaca())->setEstado('B', negocio->getSucurales()->getSucursal(idSucursal)->getColaborador(contrato->getIdColaborador()), contrato->getEntrega());
 										negocio->getSucurales()->getSucursal(idSucursal)->getPlanteles()->buscarPlantelPorVehiculo(contrato->getPlaca())->buscarEstacionamientoPorVehiculo(contrato->getPlaca())->setEstado('D');
 										contrato->setEstado(estado2);
 										cambioRealizado = true;
@@ -939,8 +939,8 @@ void Menu::ejecutar() {
 							negocio->getSucurales()->getSucursal(idSucursal)->getContrato(cod)->setEstado(estado);
 							cout << "-> Estado actualizado a: " << negocio->getSucurales()->getSucursal(idSucursal)->getContrato(cod)->getEstado() << endl;
 							ContratoAlquiler* contrato = negocio->getSucurales()->getSucursal(idSucursal)->getContrato(cod);
-							negocio->getSucurales()->getSucursal(idSucursal)->getVehiculo(negocio->getSucurales()->getSucursal(idSucursal)->getContrato(cod)->getPlaca())->setEstado('A', negocio->getSucurales()->getSucursal(idSucursal)->getColaborador(negocio->getSucurales()->getSucursal(idSucursal)->getContrato(cod)->getIdColaborador()), negocio->getSucurales()->getSucursal(idSucursal)->getContrato(cod)->getInicio());
-							negocio->getSucurales()->getSucursal(idSucursal)->getPlanteles()->getPlantel(contrato->getIdSucursal())->insertarDisponible(negocio->getSucurales()->getSucursal(idSucursal)->getVehiculo(contrato->getPlaca()));
+							negocio->getSucurales()->getSucursal(contrato->getIdSucursal())->getVehiculo(contrato->getPlaca())->setEstado('A', negocio->getSucurales()->getSucursal(contrato->getIdSucursal())->getColaborador(contrato->getIdColaborador()), contrato->getEntrega());
+							negocio->getSucurales()->getSucursal(contrato->getIdSucursal())->getPlanteles()->getPlantel(negocio->getSucurales()->getSucursal(contrato->getIdSucursal())->recomendacionDePlantel())->insertarDisponible(negocio->getSucurales()->getSucursal(contrato->getIdSucursal())->getVehiculo(contrato->getPlaca()));
 							if (estado == 3) {
 								double diasDeMas = -1;
 								while (diasDeMas < 1) {

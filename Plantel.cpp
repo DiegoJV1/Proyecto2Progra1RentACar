@@ -42,7 +42,7 @@ void Plantel::setCodigosEstacionamientos() {
 		}
 	}
 }
-void Plantel::insertarVehiculo(Vehiculo* aux, string cod, int num1, int num2) {
+void Plantel::insertarVehiculo(Vehiculo* aux, int num1, int num2) {
 	if (num1 > filas || num1<0 || num2>columnas || num2 < 0) { return; }
 	else if (p[num1][num2]->getV() && p[num1][num2]->getEstado() == true) { return; }
 	else {
@@ -51,10 +51,16 @@ void Plantel::insertarVehiculo(Vehiculo* aux, string cod, int num1, int num2) {
 	}
 }
 void Plantel::insertarDisponible(Vehiculo* aux) {
+	if (!aux) {
+		cout << "ERROR: Vehiculo nulo al insertar en plantel" << endl;
+		return;
+	}
+
 	for (int i = 0; i < filas; i++) {
 		for (int j = 0; j < columnas; j++) {
-			if (p[i][j] && p[i][j]->getEstado() == false) {
+			if (p[i][j] && !p[i][j]->getV()) {
 				p[i][j]->setV(aux);
+				aux->setUbiPlantel(p[i][j]->getCodigoNum());
 				return;
 			}
 		}

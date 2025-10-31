@@ -20,7 +20,7 @@ public:
 	string getIdentificacion();
 
 	void setCodigosEstacionamientos();
-	void insertarVehiculo(Vehiculo* aux, string cod, int num1, int num2);
+	void insertarVehiculo(Vehiculo* aux, int num1, int num2);
 	Estacionamiento* buscarEstacionamientoPorVehiculo(string placa);
 	bool buscarVehiculo(string placa);
 	void insertarDisponible(Vehiculo* aux);
