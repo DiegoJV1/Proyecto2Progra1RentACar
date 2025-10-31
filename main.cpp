@@ -20,7 +20,7 @@ int main() {
     empresa->setNombre("Renta A Car");
 
     //para probar
-    /*
+    
     Fecha* f = new Fecha(1, 2, 2020);
     Colaborador* t1 = new Colaborador("789", "f", f);
     Cliente* c1 = new Cliente("456", "h", "h");
@@ -33,7 +33,7 @@ int main() {
     nueva->insertarPlantel(p1);
     nueva->insertarVehiculo(carro);
     empresa->insertarSucursal(nueva);
-    */
+    
 
 
     //tienen que ser 10 sucursales

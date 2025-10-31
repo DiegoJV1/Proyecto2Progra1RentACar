@@ -860,6 +860,8 @@ void Menu::ejecutar() {
 									negocio->getSucurales()->getSucursal(idSucursal)->getSolicitud(cod)->getEntrega(),
 									negocio->getSucurales()->getSucursal(idSucursal)->getSolicitud(cod)->getPrecioDia());
 								negocio->getSucurales()->getSucursal(idSucursal)->insertarContrato(contrato);
+
+								
 								bool cambioRealizado = false;
 								int estado2;
 								while (!cambioRealizado) {
@@ -871,6 +873,8 @@ void Menu::ejecutar() {
 									cout << "Opcion: ";
 									cin >> estado2;
 									if (estado2 == 1 || estado2 == 2) {
+										negocio->getSucurales()->getSucursal(idSucursal)->getVehiculo(contrato->getPlaca())->setEstado('B', negocio->getSucurales()->getSucursal(idSucursal)->getColaborador(contrato->getIdColaborador()), contrato->getInicio());
+										negocio->getSucurales()->getSucursal(idSucursal)->getPlanteles()->buscarPlantelPorVehiculo(contrato->getPlaca())->buscarEstacionamientoPorVehiculo(contrato->getPlaca())->setEstado('D');
 										contrato->setEstado(estado2);
 										cambioRealizado = true;
 										system("pause");
@@ -936,6 +940,9 @@ void Menu::ejecutar() {
 						if (estado >= 3 && estado <= 5) {
 							negocio->getSucurales()->getSucursal(idSucursal)->getContrato(cod)->setEstado(estado);
 							cout << "-> Estado actualizado a: " << negocio->getSucurales()->getSucursal(idSucursal)->getContrato(cod)->getEstado() << endl;
+							ContratoAlquiler* contrato = negocio->getSucurales()->getSucursal(idSucursal)->getContrato(cod);
+							negocio->getSucurales()->getSucursal(idSucursal)->getVehiculo(negocio->getSucurales()->getSucursal(idSucursal)->getContrato(cod)->getPlaca())->setEstado('A', negocio->getSucurales()->getSucursal(idSucursal)->getColaborador(negocio->getSucurales()->getSucursal(idSucursal)->getContrato(cod)->getIdColaborador()), negocio->getSucurales()->getSucursal(idSucursal)->getContrato(cod)->getInicio());
+							negocio->getSucurales()->getSucursal(idSucursal)->getPlanteles()->getPlantel(contrato->getIdSucursal())->insertarDisponible(negocio->getSucurales()->getSucursal(idSucursal)->getVehiculo(contrato->getPlaca()));
 							if (estado == 3) {
 								double diasDeMas = -1;
 								while (diasDeMas < 1) {

@@ -24,6 +24,7 @@ void Estacionamiento::setEstado(char est) {
 	switch (est) {
 	case 'D':
 		estado = false;
+		if (v) { v = nullptr; }
 		break;
 	case 'O':
 		estado = true;

@@ -53,11 +53,8 @@ void Plantel::insertarVehiculo(Vehiculo* aux, string cod, int num1, int num2) {
 void Plantel::insertarDisponible(Vehiculo* aux) {
 	for (int i = 0; i < filas; i++) {
 		for (int j = 0; j < columnas; j++) {
-			if (!p[i][j]->getV()) {
+			if (p[i][j] && p[i][j]->getEstado() == false) {
 				p[i][j]->setV(aux);
-				if (p[i][j]->getV()) {
-					p[i][j]->getV()->setUbiPlantel(p[i][j]->getCodigoNum());
-				}
 				return;
 			}
 		}
