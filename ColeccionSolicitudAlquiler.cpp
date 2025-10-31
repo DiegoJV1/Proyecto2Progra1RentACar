@@ -40,7 +40,7 @@ string ColeccionSolicitudAlquiler::toString() {
 	stringstream ss;
 	ss << "Lista de Contratos/Solicitudes de alquiler: " << endl;
 	actual = inicio;
-	int i = 0;
+	int i = 1;
 	while (actual) {
 		ss << "Solicitud/Contrato #" << i << ":" << endl;
 		ss << actual->getObj()->toString() << endl;
@@ -61,15 +61,14 @@ bool ColeccionSolicitudAlquiler::esMayorFecha(Fecha* f1, Fecha* f2) {
 }
 bool ColeccionSolicitudAlquiler::esMenorFecha(Fecha* f1, Fecha* f2) {
 	if (f1->getAnnio() != f2->getAnnio()) {
-		return f1->getAnnio() > f2->getAnnio();
+		return f1->getAnnio() < f2->getAnnio(); 
 	}
 	if (f1->getMes() != f2->getMes()) {
-		return f1->getMes() > f2->getMes();
+		return f1->getMes() < f2->getMes(); 
 	}
-	return f1->getDia() > f2->getDia();
+	return f1->getDia() < f2->getDia(); 
 }
-
-void ColeccionSolicitudAlquiler::ordenarSolicitudesMenorAMayor() {
+void ColeccionSolicitudAlquiler::ordenarSolicitudesMayorAMenor() {
 	if (inicio == nullptr || inicio->getSig() == nullptr) return;
 
 	NodoSolicitudAlquiler* nuevoInicio = nullptr;
@@ -78,34 +77,22 @@ void ColeccionSolicitudAlquiler::ordenarSolicitudesMenorAMayor() {
 	while (actual) {
 		NodoSolicitudAlquiler* siguiente = actual->getSig();
 		Fecha* fechaActual = actual->getObj()->getInicio();
-		if (!nuevoInicio || esMenorFecha(fechaActual, nuevoInicio->getObj()->getInicio())) {
-			Fecha* fechaActual = actual->getObj()->getInicio();
-			if (!nuevoInicio || esMayorFecha(fechaActual, nuevoInicio->getObj()->getInicio())) {
-				actual->setSig(nuevoInicio);
-				nuevoInicio = actual;
-			}
-			else {
-				NodoSolicitudAlquiler* s = nuevoInicio;
-				while (s->getSig() && !esMenorFecha(fechaActual, s->getSig()->getObj()->getInicio())) {
-					s = s->getSig();
-				}
-			}
-			if (!nuevoInicio || esMayorFecha(fechaActual, nuevoInicio->getObj()->getInicio())) {
-				actual->setSig(nuevoInicio);
-				nuevoInicio = actual;
-			}
-			else {
-				NodoSolicitudAlquiler* s = nuevoInicio;
-				while (s->getSig() && !esMayorFecha(fechaActual, s->getSig()->getObj()->getInicio())) {
-					s = s->getSig();
-				}
-				actual->setSig(s->getSig());
-				s->setSig(actual);
-			}
-			actual = siguiente;
+
+		if (!nuevoInicio || esMayorFecha(fechaActual, nuevoInicio->getObj()->getInicio())) {
+			actual->setSig(nuevoInicio);
+			nuevoInicio = actual;
 		}
-		inicio = nuevoInicio;
+		else {
+			NodoSolicitudAlquiler* s = nuevoInicio;
+			while (s->getSig() && !esMayorFecha(fechaActual, s->getSig()->getObj()->getInicio())) {
+				s = s->getSig();
+			}
+			actual->setSig(s->getSig());
+			s->setSig(actual);
+		}
+		actual = siguiente;
 	}
+	inicio = nuevoInicio;
 }
 	SolicitudAlquiler* ColeccionSolicitudAlquiler::getSolicitudCliente(string id) {
 		actual = inicio;

@@ -12,7 +12,7 @@ public:
 	SolicitudAlquiler* buscarSolicitud(string cod);
 	bool esMayorFecha(Fecha* f1, Fecha* f2);
 	bool esMenorFecha(Fecha* f1, Fecha* f2);
-	void ordenarSolicitudesMenorAMayor();
+	void ordenarSolicitudesMayorAMenor();
 
 	SolicitudAlquiler* getSolicitudCliente(string id);
 	SolicitudAlquiler* getSolicitudVehiculo(string placa);
