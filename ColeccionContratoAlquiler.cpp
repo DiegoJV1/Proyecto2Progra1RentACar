@@ -69,7 +69,7 @@ bool ColeccionContratoAlquiler::esMenorFecha(Fecha* f1, Fecha* f2) {
 	return f1->getDia() > f2->getDia();
 }
 
-void ColeccionContratoAlquiler::ordenarSolicitudesMenorAMayor() {
+void ColeccionContratoAlquiler::ordenarContratosMenorAMayor() {
 	if (inicio == nullptr || inicio->getSig() == nullptr) return;
 
 	NodoContratoAlquiler* nuevoInicio = nullptr;
@@ -78,34 +78,22 @@ void ColeccionContratoAlquiler::ordenarSolicitudesMenorAMayor() {
 	while (actual) {
 		NodoContratoAlquiler* siguiente = actual->getSig();
 		Fecha* fechaActual = actual->getObj()->getInicio();
-		if (!nuevoInicio || esMenorFecha(fechaActual, nuevoInicio->getObj()->getInicio())) {
-			Fecha* fechaActual = actual->getObj()->getInicio();
-			if (!nuevoInicio || esMayorFecha(fechaActual, nuevoInicio->getObj()->getInicio())) {
-				actual->setSig(nuevoInicio);
-				nuevoInicio = actual;
-			}
-			else {
-				NodoContratoAlquiler* s = nuevoInicio;
-				while (s->getSig() && !esMenorFecha(fechaActual, s->getSig()->getObj()->getInicio())) {
-					s = s->getSig();
-				}
-			}
-			if (!nuevoInicio || esMayorFecha(fechaActual, nuevoInicio->getObj()->getInicio())) {
-				actual->setSig(nuevoInicio);
-				nuevoInicio = actual;
-			}
-			else {
-				NodoContratoAlquiler* s = nuevoInicio;
-				while (s->getSig() && !esMayorFecha(fechaActual, s->getSig()->getObj()->getInicio())) {
-					s = s->getSig();
-				}
-				actual->setSig(s->getSig());
-				s->setSig(actual);
-			}
-			actual = siguiente;
+
+		if (!nuevoInicio || esMayorFecha(fechaActual, nuevoInicio->getObj()->getInicio())) {
+			actual->setSig(nuevoInicio);
+			nuevoInicio = actual;
 		}
-		inicio = nuevoInicio;
+		else {
+			NodoContratoAlquiler* s = nuevoInicio;
+			while (s->getSig() && !esMayorFecha(fechaActual, s->getSig()->getObj()->getInicio())) {
+				s = s->getSig();
+			}
+			actual->setSig(s->getSig());
+			s->setSig(actual);
+		}
+		actual = siguiente;
 	}
+	inicio = nuevoInicio;
 }
 ContratoAlquiler* ColeccionContratoAlquiler::getContratoCliente(string id) {
 	actual = inicio;

@@ -149,7 +149,7 @@ void Menu::ejecutar() {
 									cin.ignore();
 									cout << "Digite el lugar de residencia del cliente: " << endl;
 									getline(cin, resi);
-									PersonaFisica* nuevo = new PersonaFisica(ced, nom, resi,"f");
+									PersonaFisica* nuevo = new PersonaFisica(ced, nom, resi);
 									negocio->getSucurales()->getSucursal(num)->insertarCliente(nuevo);
 									system("pause");
 									system("cls");
@@ -178,7 +178,7 @@ void Menu::ejecutar() {
 									cin.ignore();
 									cout << "Digite el porcentaje descuento de un alquiler del cliente: " << endl;
 									cin >> desc;
-									PersonaJuridica* nuevo = new PersonaJuridica(ced,nom,resi,"j",act, desc);
+									PersonaJuridica* nuevo = new PersonaJuridica(ced,nom,resi,act, desc);
 									negocio->getSucurales()->getSucursal(num)->insertarCliente(nuevo);
 									system("pause");
 									system("cls");
@@ -228,7 +228,6 @@ void Menu::ejecutar() {
 							}
 							cout << "Digite la identificacion del Cliente: " << endl;
 							cin >> ced;
-							cout << negocio->getSucurales()->getSucursal(num) << endl;
 							if (!negocio->getSucurales()->getSucursal(num)->getCliente(ced)) {
 								cout << "ERROR-Cliente no existente" << endl;
 								system("pause");
@@ -331,7 +330,6 @@ void Menu::ejecutar() {
 							}
 							cout << "Digite la identificacion del Colaborador: " << endl;
 							cin >> ced;
-							cout << negocio->getSucurales()->getSucursal(num) << endl;
 							if (!negocio->getSucurales()->getSucursal(num)->getColaborador(ced)) {
 								cout << "ERROR-Colaborador no existente" << endl;
 								system("pause");
@@ -773,8 +771,13 @@ void Menu::ejecutar() {
 
 					cout << "Cantidad de Dias de Alquiler: ";
 					cin >> canDias;
-					double precioDia;
-					precioDia = negocio->getSucurales()->getSucursal(idSucursal)->getVehiculo(placa)->getPrecioAlquiler();
+					double precioDia2;
+					double precioDia1=negocio->getSucurales()->getSucursal(idSucursal)->getVehiculo(placa)->getPrecioAlquiler();
+					double desc = 0;
+					if (PersonaJuridica* aux = dynamic_cast<PersonaJuridica*>(negocio->getSucurales()->getSucursal(idSucursal)->getCliente(idCliente))) {
+						desc = (aux->getPorcenDescuento()*precioDia1)/100;
+					}
+					precioDia2 = precioDia1-desc;
 					SolicitudAlquiler* nuevaSolicitud = new SolicitudAlquiler(
 						codigo,
 						idCliente,
@@ -784,8 +787,9 @@ void Menu::ejecutar() {
 						canDias,
 						inicio,
 						entrega,
-						precioDia
+						precioDia2
 					);
+				
 					negocio->getSucurales()->getSucursal(idSucursal)->insertarSolicitud(nuevaSolicitud);
 					cout << "-> Solicitud:  " << codigo << " creada exitosamente (Estado: pendiente)." << endl;
 					system("pause");
@@ -1102,7 +1106,7 @@ void Menu::ejecutar() {
 				cout << "1-Estados de un vehiculo especifico" << endl;
 				cout << "2-Reportes de contratos para un vehiculo especifico" << endl;
 				cout << "3-Reporte de porcentaje de ocupacion de los planteles" << endl;
-				cout << "4.Volver" << endl;
+				cout << "4-Volver" << endl;
 				cout << "Digite el numero de la opcion seleccionada:" << endl;
 				cin >> opcion2;
 				system("pause");
@@ -1153,7 +1157,7 @@ void Menu::ejecutar() {
 						break;
 					}
 
-					cout << negocio->getSucurales()->getSucursal(idSucursal)->getSolicitudes()->ImprimirSolicitudVehiculo(placa);
+					cout << negocio->getSucurales()->getSucursal(idSucursal)->getContratos()->ImprimirContratoVehiculo(placa);
 
 					system("pause");
 					system("cls");
@@ -1202,15 +1206,15 @@ void Menu::ejecutar() {
 						break;
 					}
 
-					negocio->getSucurales()->getSucursal(idSucursal)->getSolicitudes()->ordenarSolicitudesMayorAMenor();
+					negocio->getSucurales()->getSucursal(idSucursal)->getContratos()->ordenarContratosMenorAMayor();
 
-					cout << negocio->getSucurales()->getSucursal(idSucursal)->getSolicitudes()->toString();
+					cout << negocio->getSucurales()->getSucursal(idSucursal)->getContratos()->toString();
 					system("pause");
 					system("cls");
 					break;
 				}
 				case 2: {
-					cout << "----Reporte alquileres por colaborador----" << endl;
+					cout << "----Reporte de contratos de alquileres por colaborador----" << endl;
 					string idColaborador, idSucursal;
 					cout << "ID Sucursal: ";
 					cin >> idSucursal;
@@ -1231,7 +1235,7 @@ void Menu::ejecutar() {
 
 					cout << negocio->getSucurales()->getSucursal(idSucursal)->getColaborador(idColaborador)->toString() << endl;
 
-					cout << negocio->getSucurales()->getSucursal(idSucursal)->getSolicitudes()->ImprimirSolicitudColaborador(idColaborador);
+					cout << negocio->getSucurales()->getSucursal(idSucursal)->getContratos()->ImprimirContratoColaborador(idColaborador);
 
 					system("pause");
 					system("cls");

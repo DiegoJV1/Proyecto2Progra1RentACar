@@ -3,7 +3,7 @@
 class PersonaFisica : public Cliente {
 public:
 	PersonaFisica();
-	PersonaFisica(string id, string nom, string resi, string tipo);
+	PersonaFisica(string id, string nom, string resi);
 	virtual ~PersonaFisica();
 };
 

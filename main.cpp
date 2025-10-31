@@ -20,7 +20,7 @@ int main() {
     empresa->setNombre("Renta A Car");
 
     //para probar
-    
+    /*
     Fecha* f = new Fecha(1, 2, 2020);
     Colaborador* t1 = new Colaborador("789", "f", f);
     Cliente* c1 = new Cliente("456", "h", "h","f");
@@ -33,7 +33,7 @@ int main() {
     nueva->insertarPlantel(p1);
     nueva->insertarVehiculo(carro);
     empresa->insertarSucursal(nueva);
-    
+    */
 
 
 	//Las sucursales el codigo de las sucursales son del 1 al 10, y se llaman en el menu con ese numero
@@ -64,7 +64,7 @@ int main() {
 		//Los clientes tienen id del 1 al 300, y se llaman en el menu con ese numero
         string id = numero(i);
         string nom = "Cliente " + numero(i);
-        Cliente* cli = new Cliente(id, nom, "Residencia" + numero(i),"f");
+        Cliente* cli = new Cliente(id, nom, "Residencia" + numero(i));
 
         if (i <= 30) suc1->insertarCliente(cli);
         else if (i <= 60) suc2->insertarCliente(cli);

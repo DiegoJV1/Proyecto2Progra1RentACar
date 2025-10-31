@@ -4,11 +4,11 @@
 using namespace std;
 class Cliente {
 protected:
-	string id, nombre, residencia, tipo;
+	string id, nombre, residencia;
 	int contador;
 public:
 	Cliente();
-	Cliente(string id, string nom, string resi, string tipo);
+	Cliente(string id, string nom, string resi);
 
 	virtual ~Cliente();
 	void setId(string id);
@@ -20,7 +20,7 @@ public:
 	string getNombre();
 	string getResidencia();
 	int getCantidadDeSolicitudes();
-	string getTipo();
+	
 
 	
 

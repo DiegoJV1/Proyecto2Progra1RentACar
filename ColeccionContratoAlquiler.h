@@ -11,7 +11,7 @@ public:
 	ContratoAlquiler* buscarContrato(string cod);
 	bool esMayorFecha(Fecha* f1, Fecha* f2);
 	bool esMenorFecha(Fecha* f1, Fecha* f2);
-	void ordenarSolicitudesMenorAMayor();
+	void ordenarContratosMenorAMayor();
 
 	ContratoAlquiler* getContratoCliente(string id);
 	ContratoAlquiler* getContratoVehiculo(string placa);
