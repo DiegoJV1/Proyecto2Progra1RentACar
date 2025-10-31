@@ -7,6 +7,7 @@ Sucursal::Sucursal() : ubicacion(""), num("") {
 	planteles = new ColeccionPlantel();
 	solicitudes = new ColeccionSolicitudAlquiler();
 	contratos = new ColeccionContratoAlquiler();
+	//juridicas = new ColeccionPersonaJuridica();
 }
 Sucursal::Sucursal(string ubi, string num) : ubicacion(ubi), num(num) {
 	clientes = new ColeccionCliente();
@@ -15,6 +16,7 @@ Sucursal::Sucursal(string ubi, string num) : ubicacion(ubi), num(num) {
 	planteles = new ColeccionPlantel();
 	solicitudes = new ColeccionSolicitudAlquiler();
 	contratos = new ColeccionContratoAlquiler();
+	//juridicas = new ColeccionPersonaJuridica();
 }
 Sucursal::~Sucursal() {
 	delete clientes;
@@ -23,6 +25,7 @@ Sucursal::~Sucursal() {
 	delete planteles;
 	delete solicitudes;
 	delete contratos;
+	//delete juridicas;
 }
 void Sucursal::setNum(string num) { this->num = num; }
 string Sucursal::getNum() { return num; }
@@ -75,10 +78,23 @@ void Sucursal::insertarContrato(ContratoAlquiler* aux) {
 	getCliente(aux->getIdCliente())->aumentaContador();
 
 }
-
+/*void Sucursal::insertarJuridica(PersonaJuridica* aux) {
+	if (!juridicas) {
+		juridicas = new ColeccionPersonaJuridica();
+		juridicas->insertarPersonaJuridica(aux);
+	}
+	else {
+		juridicas->insertarPersonaJuridica(aux);
+	}
+}
+*/
 void Sucursal::eliminarCliente(string id) {
 	if (clientes) {
 		clientes->eliminarCliente(id);
+		/*if (juridicas->buscarPersonaJuridica(id) == true) {
+			juridicas->eliminarPersonaJuridica(id);
+		}
+		*/
 	}
 	else {
 		return;
@@ -127,13 +143,17 @@ SolicitudAlquiler* Sucursal::getSolicitud(string cod) {
 ContratoAlquiler* Sucursal::getContrato(string cod) {
 	return contratos->buscarContrato(cod);
 }
-
+/*PersonaJuridica* Sucursal::getJuridica(string id) {
+	return juridicas->getPersonaJuridica(id);
+}
+*/
 ColeccionPlantel* Sucursal::getPlanteles() { return planteles; }
 ColeccionCliente* Sucursal::getClientes() { return clientes; }
 ColeccionColaborador* Sucursal::getColaboradores() { return colaboradores; }
 ColeccionVehiculo* Sucursal::getVehiculos() { return vehiculos; }
 ColeccionSolicitudAlquiler* Sucursal::getSolicitudes() { return solicitudes; }
 ColeccionContratoAlquiler* Sucursal::getContratos() { return contratos; }
+//ColeccionPersonaJuridica* Sucursal::getJuridicas() { return juridicas; }
 
 string Sucursal::recomendacionDePlantel() {
 	if (planteles) {

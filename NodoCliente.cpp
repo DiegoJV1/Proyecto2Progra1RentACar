@@ -1,6 +1,6 @@
 #include "NodoCliente.h"
 NodoCliente::NodoCliente() : obj(nullptr), sig(nullptr) {}
-NodoCliente::NodoCliente(Cliente* aux) :obj(aux), sig(nullptr) {}
+NodoCliente::NodoCliente(Cliente* aux) : obj(aux), sig(nullptr) {}
 NodoCliente::~NodoCliente() {
 	delete obj;
 	obj = nullptr;

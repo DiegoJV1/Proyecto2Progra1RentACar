@@ -1,5 +1,8 @@
 #include "Menu.h"
+#include"PersonaFisica.h"
+#include"PersonaJuridica.h"
 #include<sstream>
+
 Menu::Menu() : negocio(nullptr) {}
 Menu::Menu(RentACar* aux) :negocio(aux) {}
 Menu::~Menu() { delete negocio; }
@@ -10,7 +13,7 @@ void Menu::ejecutar() {
 		cout << "1-Datos Generales" << endl;
 		cout << "2-Planteles, Parqueos y Vehiculos" << endl;
 		cout << "3-Solicitudes y Contratos" << endl;
-		cout << "4-Reportes de Cliente" << endl;
+		cout << "4-Reportes de Clientes" << endl;
 		cout << "5-Reportes de Planteles y Vehiculos" << endl;
 		cout << "6-Reportes de Alquileres" << endl;
 		cout << "7-Salir del Sistema" << endl;
@@ -120,25 +123,69 @@ void Menu::ejecutar() {
 								system("cls");
 								break;
 							}
-							string nom, ced, resi;
-							cin.ignore();
-							cout << "Digite el nombre del cliente: " << endl;
-							getline(cin, nom);
-							cout << "Digite la identificacion del cliente: " << endl;
-							cin >> ced;
-							cin.ignore();
-							cout << "Digite el lugar de residencia del cliente: " << endl;
-							getline(cin, resi);
-							Cliente* nuevo = new Cliente(ced, nom, resi);
-							if (negocio->getSucurales()->getSucursal(num)->getCliente(ced)) {
-								cout << "ERROR-Cliente existente" << endl;
+							int opcion10 = 0;
+							while (opcion10 != 3) {
+								cout << "----Ingreso de Cliente----" << endl;
+								cout << "1-Persona Fisica" << endl;
+								cout << "2-Persona Juridica" << endl;
+								cout << "3-Volver" << endl;
+								cin >> opcion10;
 								system("pause");
 								system("cls");
-								break;
+								switch (opcion10) {
+								case 1: {
+									string nom, ced, resi;
+									cout << "Digite el nombre del cliente: " << endl;
+									getline(cin, nom);
+									cin.ignore();
+									cout << "Digite la identificacion del cliente: " << endl;
+									cin >> ced;
+									if (negocio->getSucurales()->getSucursal(num)->getCliente(ced)) {
+										cout << "ERROR-Cliente existente" << endl;
+										system("pause");
+										system("cls");
+										break;
+									}
+									cin.ignore();
+									cout << "Digite el lugar de residencia del cliente: " << endl;
+									getline(cin, resi);
+									PersonaFisica* nuevo = new PersonaFisica(ced, nom, resi,"f");
+									negocio->getSucurales()->getSucursal(num)->insertarCliente(nuevo);
+									system("pause");
+									system("cls");
+									break;
+								}
+								case 2: {
+									string nom, ced, resi, act;
+									double desc;
+									cout << "Digite el nombre del cliente: " << endl;
+									getline(cin, nom);
+									cin.ignore();
+									cout << "Digite la identificacion juridica del cliente: " << endl;
+									cin >> ced;
+									if (negocio->getSucurales()->getSucursal(num)->getCliente(ced)) {
+										cout << "ERROR-Cliente existente" << endl;
+										system("pause");
+										system("cls");
+										break;
+									}
+									cin.ignore();
+									cout << "Digite el lugar de residencia del cliente: " << endl;
+									getline(cin, resi);
+									cin.ignore();
+									cout << "Digite la actividad economica del cliente: " << endl;
+									getline(cin, act);
+									cin.ignore();
+									cout << "Digite el porcentaje descuento de un alquiler del cliente: " << endl;
+									cin >> desc;
+									PersonaJuridica* nuevo = new PersonaJuridica(ced,nom,resi,"j",act, desc);
+									negocio->getSucurales()->getSucursal(num)->insertarCliente(nuevo);
+									system("pause");
+									system("cls");
+									break;
+								}
+								}
 							}
-							negocio->getSucurales()->getSucursal(num)->insertarCliente(nuevo);
-							system("pause");
-							system("cls");
 							break;
 						}
 						case 2: {
@@ -726,7 +773,8 @@ void Menu::ejecutar() {
 
 					cout << "Cantidad de Dias de Alquiler: ";
 					cin >> canDias;
-					double precioDia = negocio->getSucurales()->getSucursal(idSucursal)->getVehiculo(placa)->getPrecioAlquiler();
+					double precioDia;
+					precioDia = negocio->getSucurales()->getSucursal(idSucursal)->getVehiculo(placa)->getPrecioAlquiler();
 					SolicitudAlquiler* nuevaSolicitud = new SolicitudAlquiler(
 						codigo,
 						idCliente,

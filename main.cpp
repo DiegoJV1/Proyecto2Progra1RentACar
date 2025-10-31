@@ -23,7 +23,7 @@ int main() {
     
     Fecha* f = new Fecha(1, 2, 2020);
     Colaborador* t1 = new Colaborador("789", "f", f);
-    Cliente* c1 = new Cliente("456", "h", "h");
+    Cliente* c1 = new Cliente("456", "h", "h","f");
     Plantel* p1 = new Plantel("A", 1, 3, 4);
     Sucursal* nueva = new Sucursal("H", "123");
     nueva->insertarCliente(c1);
@@ -64,7 +64,7 @@ int main() {
 		//Los clientes tienen id del 1 al 300, y se llaman en el menu con ese numero
         string id = numero(i);
         string nom = "Cliente " + numero(i);
-        Cliente* cli = new Cliente(id, nom, "Residencia" + numero(i));
+        Cliente* cli = new Cliente(id, nom, "Residencia" + numero(i),"f");
 
         if (i <= 30) suc1->insertarCliente(cli);
         else if (i <= 60) suc2->insertarCliente(cli);

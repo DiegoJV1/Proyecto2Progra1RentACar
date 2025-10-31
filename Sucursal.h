@@ -5,6 +5,7 @@
 #include"ColeccionPlantel.h"
 #include"ColeccionSolicitudAlquiler.h"
 #include"ColeccionContratoAlquiler.h"
+//#include"ColeccionPersonaJuridica.h"
 class Sucursal {
 private:
 	string ubicacion, num;
@@ -14,6 +15,7 @@ private:
 	ColeccionColaborador* colaboradores;
 	ColeccionSolicitudAlquiler* solicitudes;
 	ColeccionContratoAlquiler* contratos;
+	//ColeccionPersonaJuridica* juridicas;
 public:
 	Sucursal();
 	Sucursal(string ubi, string num);
@@ -28,6 +30,7 @@ public:
 	void insertarPlantel(Plantel* aux);
 	void insertarSolicitud(SolicitudAlquiler* aux);
 	void insertarContrato(ContratoAlquiler* aux);
+	//void insertarJuridica(PersonaJuridica* aux);
 
 	ColeccionPlantel* getPlanteles();
 	ColeccionCliente* getClientes();
@@ -35,6 +38,7 @@ public:
 	ColeccionVehiculo* getVehiculos();
 	ColeccionSolicitudAlquiler* getSolicitudes();
 	ColeccionContratoAlquiler* getContratos();
+	//ColeccionPersonaJuridica* getJuridicas();
 	
 	void eliminarCliente(string id);
 	void eliminarVehiculo(string placa);
@@ -47,6 +51,7 @@ public:
 	Plantel* getPlantel(string iden);
 	SolicitudAlquiler* getSolicitud(string cod);
 	ContratoAlquiler* getContrato(string cod);
+	//PersonaJuridica* getJuridica(string id);
 
 	void modificarContadorClientes();
 	string recomendacionDePlantel();

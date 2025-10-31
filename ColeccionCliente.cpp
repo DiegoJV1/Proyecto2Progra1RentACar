@@ -1,5 +1,6 @@
 #include "ColeccionCliente.h"
 #include<sstream>
+
 ColeccionCliente::ColeccionCliente() : inicio(nullptr), actual(nullptr) {}
 ColeccionCliente::~ColeccionCliente() {
 	while (inicio) {

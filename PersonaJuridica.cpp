@@ -1,7 +1,7 @@
 #include "PersonaJuridica.h"
 #include<sstream>
 PersonaJuridica::PersonaJuridica() :Cliente(), actividadEconomica(""), porcenDescuento(0.0) {}
-PersonaJuridica::PersonaJuridica(string id, string nom, string resi, string act, double desc) : Cliente(id, nom, resi), actividadEconomica(act), porcenDescuento(desc) {}
+PersonaJuridica::PersonaJuridica(string id, string nom, string resi,string tipo, string act, double desc) : Cliente(id, nom, resi, tipo), actividadEconomica(act), porcenDescuento(desc) {}
 PersonaJuridica:: ~PersonaJuridica() {}
 void PersonaJuridica::setActividadEconomica(string act) { this->actividadEconomica = act; }
 void PersonaJuridica::setPorcenDescuento(double desc) { this->porcenDescuento = desc; }

@@ -6,7 +6,7 @@ protected:
 	double porcenDescuento;
 public:
 	PersonaJuridica();
-	PersonaJuridica(string id, string nom, string resi, string act, double desc);
+	PersonaJuridica(string id, string nom, string resi,string tipo, string act, double desc);
 	virtual ~PersonaJuridica();
 	void setActividadEconomica(string act);
 	void setPorcenDescuento(double desc);
