@@ -1290,7 +1290,7 @@ void Menu::ejecutar() {
 				system("pause");
 				system("cls");
 				switch (opcion2) {
-				case 1: {
+				case 1: {//Para poder visualizar los contratos por sucursal se tienen que tener contratos creados o solicitudes aprobadas
 					cout << "----Visualizacion de todos los contratos por sucursal(del mas reciente al mas antiguo)----\n" << endl;
 					string idSucursal;
 					cout << "ID Sucursal: ";
@@ -1309,8 +1309,8 @@ void Menu::ejecutar() {
 					system("cls");
 					break;
 				}
-				case 2: {
-					cout << "----Reporte de contratos de alquileres por colaborador----" << endl;
+				case 2: {//Los colaboradores que tienen alquileres son los de ID: 1, 3, 5, 7, 9 y asi sucesivamente hasta 19.
+					cout << "----Reporte de alquileres por colaborador----" << endl;
 					string idColaborador, idSucursal;
 					cout << "ID Sucursal: ";
 					cin >> idSucursal;
@@ -1331,7 +1331,7 @@ void Menu::ejecutar() {
 
 					cout << negocio->getSucurales()->getSucursal(idSucursal)->getColaborador(idColaborador)->toString() << endl;
 
-					cout << negocio->getSucurales()->getSucursal(idSucursal)->getContratos()->ImprimirContratoColaborador(idColaborador);
+					cout << negocio->getSucurales()->getSucursal(idSucursal)->getSolicitudes()->ImprimirSolicitudColaborador(idColaborador);
 
 					system("pause");
 					system("cls");

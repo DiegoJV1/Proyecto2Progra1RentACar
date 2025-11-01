@@ -18,25 +18,6 @@ int main() {
 
     RentACar* empresa = new RentACar();
     empresa->setNombre("Renta A Car");
-
-    //para probar
-    
-    Fecha* f = new Fecha(1, 2, 2020);
-    Colaborador* t1 = new Colaborador("789", "f", f);
-    Cliente* c1 = new Cliente("456", "h", "h");
-    Plantel* p1 = new Plantel("A", 1, 3, 4);
-    Plantel* p2 = new Plantel("A", 1, 5, 6);
-    Sucursal* nueva = new Sucursal("H", "123");
-    Sucursal* nueva2 = new Sucursal("A", "321");
-    nueva->insertarCliente(c1);
-    nueva->insertarColaborador(t1);
-    Vehiculo* carro = new Vehiculo("0", "f", "t", 'A', "B1");
-    p1->insertarVehiculo(carro, 0, 0);
-    nueva->insertarPlantel(p1);
-    nueva->insertarVehiculo(carro);
-    nueva2->insertarPlantel(p2);
-    empresa->insertarSucursal(nueva);
-    empresa->insertarSucursal(nueva2);
     
 
 
@@ -282,7 +263,7 @@ int main() {
         string idCte = numero(cliente);
 
         string placa = numero(i);
-        string idCol = numero(6);
+        string idCol = numero(3);
 
         Fecha* inicio = new Fecha(10, 10, 2025);
         Fecha* entrega = new Fecha(15, 10, 2025);
@@ -298,7 +279,7 @@ int main() {
         string idCte = numero(cliente);
 
         string placa = numero(i);
-        string idCol = numero(11);
+        string idCol = numero(5);
 
         Fecha* inicio = new Fecha(10, 10, 2025);
         Fecha* entrega = new Fecha(15, 10, 2025);
@@ -314,7 +295,7 @@ int main() {
         string idCte = numero(cliente);
 
         string placa = numero(i);
-        string idCol = numero(16);
+        string idCol = numero(7);
 
         Fecha* inicio = new Fecha(10, 10, 2025);
         Fecha* entrega = new Fecha(15, 10, 2025);
@@ -330,7 +311,7 @@ int main() {
         string idCte = numero(cliente);
 
         string placa = numero(i);
-        string idCol = numero(21);
+        string idCol = numero(9);
 
         Fecha* inicio = new Fecha(10, 10, 2025);
         Fecha* entrega = new Fecha(15, 10, 2025);
@@ -346,7 +327,7 @@ int main() {
         string idCte = numero(cliente);
 
         string placa = numero(i);
-        string idCol = numero(26);
+        string idCol = numero(11);
 
         Fecha* inicio = new Fecha(10, 10, 2025);
         Fecha* entrega = new Fecha(15, 10, 2025);
@@ -362,7 +343,7 @@ int main() {
         string idCte = numero(cliente);
 
         string placa = numero(i);
-        string idCol = numero(31);
+        string idCol = numero(13);
 
         Fecha* inicio = new Fecha(10, 10, 2025);
         Fecha* entrega = new Fecha(15, 10, 2025);
@@ -378,7 +359,7 @@ int main() {
         string idCte = numero(cliente);
 
         string placa = numero(i);
-        string idCol = numero(36);
+        string idCol = numero(15);
 
         Fecha* inicio = new Fecha(10, 10, 2025);
         Fecha* entrega = new Fecha(15, 10, 2025);
@@ -394,7 +375,7 @@ int main() {
         string idCte = numero(cliente);
 
         string placa = numero(i);
-        string idCol = numero(41);
+        string idCol = numero(17);
 
         Fecha* inicio = new Fecha(10, 10, 2025);
         Fecha* entrega = new Fecha(15, 10, 2025);
@@ -410,7 +391,7 @@ int main() {
         string idCte = numero(cliente);
 
         string placa = numero(i);
-        string idCol = numero(46);
+        string idCol = numero(19);
 
         Fecha* inicio = new Fecha(10, 10, 2025);
         Fecha* entrega = new Fecha(15, 10, 2025);
@@ -423,5 +404,6 @@ int main() {
     Menu* menu = new Menu(empresa);
     menu->ejecutar();
     delete menu;
+
     return 0;
 }
