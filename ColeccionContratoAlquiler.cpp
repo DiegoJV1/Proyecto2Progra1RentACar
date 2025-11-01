@@ -16,11 +16,13 @@ void ColeccionContratoAlquiler::insertarContrato(ContratoAlquiler* aux) {
 	}
 	else {
 		actual = inicio;
-		while (actual->getSig()) {
+		while (actual) {
 			if (actual->getObj()->getCodigo() == aux->getCodigo()) {
 				cout << "ERROR: Ya existe la solicitud" << endl;
+				delete nuevo; 
 				return;
 			}
+			if (!actual->getSig()) break; 
 			actual = actual->getSig();
 		}
 		actual->setSig(nuevo);
@@ -38,6 +40,10 @@ ContratoAlquiler* ColeccionContratoAlquiler::buscarContrato(string cod) {
 }
 string ColeccionContratoAlquiler::toString() {
 	stringstream ss;
+	if (!inicio) {
+		ss << "No hay contratos o solicitudes de alquiler." << endl;
+		return ss.str();
+	}
 	ss << "Lista de Contratos/Solicitudes de alquiler: " << endl;
 	actual = inicio;
 	int i = 0;
@@ -61,12 +67,12 @@ bool ColeccionContratoAlquiler::esMayorFecha(Fecha* f1, Fecha* f2) {
 }
 bool ColeccionContratoAlquiler::esMenorFecha(Fecha* f1, Fecha* f2) {
 	if (f1->getAnnio() != f2->getAnnio()) {
-		return f1->getAnnio() > f2->getAnnio();
+		return f1->getAnnio() < f2->getAnnio();
 	}
 	if (f1->getMes() != f2->getMes()) {
-		return f1->getMes() > f2->getMes();
+		return f1->getMes() < f2->getMes();
 	}
-	return f1->getDia() > f2->getDia();
+	return f1->getDia() < f2->getDia();
 }
 
 void ColeccionContratoAlquiler::ordenarContratosMenorAMayor() {
@@ -103,6 +109,7 @@ ContratoAlquiler* ColeccionContratoAlquiler::getContratoCliente(string id) {
 		}
 		actual = actual->getSig();
 	}
+	return nullptr;
 }
 ContratoAlquiler* ColeccionContratoAlquiler::getContratoVehiculo(string placa) {
 	actual = inicio;
@@ -112,6 +119,7 @@ ContratoAlquiler* ColeccionContratoAlquiler::getContratoVehiculo(string placa) {
 		}
 		actual = actual->getSig();
 	}
+	return nullptr;
 }
 ContratoAlquiler* ColeccionContratoAlquiler::getContratoColaborador(string id) {
 	actual = inicio;
@@ -121,6 +129,7 @@ ContratoAlquiler* ColeccionContratoAlquiler::getContratoColaborador(string id) {
 		}
 		actual = actual->getSig();
 	}
+	return nullptr;
 }
 
 string ColeccionContratoAlquiler::ImprimirContratoCliente(string id) {
