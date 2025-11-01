@@ -257,7 +257,7 @@ int Plantel::espaciosLibres() {
 bool Plantel::buscarVehiculo(string placa) {
 	for (int i = 0; i < filas; i++) {
 		for (int j = 0; j < columnas; j++) {
-			if (p[i][j] && p[i][j]->getV()->getPlaca() == placa) {
+			if (p[i][j] && p[i][j]->getV() && p[i][j]->getV()->getPlaca() == placa) {
 				return true;
 			}
 		}
@@ -265,14 +265,16 @@ bool Plantel::buscarVehiculo(string placa) {
 	return false;
 }
 Estacionamiento* Plantel::buscarEstacionamientoPorVehiculo(string placa) {
-	for (int i = 0; i < filas; i++) {
-		for (int j = 0; j < columnas; j++) {
-			if (p[i][j] && p[i][j]->getV()->getPlaca() == placa) {
-				return p[i][j];
-			}
-		}
-	}
-	return nullptr;
+    for (int i = 0; i < filas; ++i) {
+        for (int j = 0; j < columnas; ++j) {
+            if (!p[i][j]) continue;
+            Vehiculo* v = p[i][j]->getV();
+            if (v && v->getPlaca() == placa) {
+                return p[i][j];
+            }
+        }
+    }
+    return nullptr;
 }
 Vehiculo* Plantel::buscarVehiculoPorCodigo(string cod) {
 	Vehiculo* encontrado = nullptr;

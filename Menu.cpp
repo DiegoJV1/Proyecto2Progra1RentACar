@@ -361,7 +361,7 @@ void Menu::ejecutar() {
 				cout << "Digite el numero de la opcion seleccionada:" << endl;
 				cin >> opcion2;
 				system("pause");
-				system("cls");
+			 system("cls");
 				switch (opcion2) {
 				case 1: {
 					string num;
@@ -1011,7 +1011,18 @@ void Menu::ejecutar() {
 									cin >> estado2;
 									if (estado2 == 1 || estado2 == 2) {
 										negocio->getSucurales()->getSucursal(idSucursal)->getVehiculo(contrato->getPlaca())->setEstado('B', negocio->getSucurales()->getSucursal(idSucursal)->getColaborador(contrato->getIdColaborador()), contrato->getEntrega());
-										negocio->getSucurales()->getSucursal(idSucursal)->getPlanteles()->buscarPlantelPorVehiculo(contrato->getPlaca())->buscarEstacionamientoPorVehiculo(contrato->getPlaca())->setEstado('D');
+										ColeccionPlantel* plantelesPtr = negocio->getSucurales()->getSucursal(idSucursal)->getPlanteles();
+										Plantel* plantelEcontrado = nullptr;
+										if (plantelesPtr != nullptr) {
+											plantelEcontrado = plantelesPtr->buscarPlantelPorVehiculo(contrato->getPlaca());
+											
+										}
+										if (plantelEcontrado != nullptr) {
+											 Estacionamiento* estPtr = plantelEcontrado->buscarEstacionamientoPorVehiculo(contrato->getPlaca());
+											if (estPtr != nullptr) {
+												 estPtr->setEstado('D');
+											}
+										}
 										contrato->setEstado(estado2);
 										cambioRealizado = true;
 										system("pause");

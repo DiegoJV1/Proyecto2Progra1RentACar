@@ -72,6 +72,7 @@ Plantel* ColeccionPlantel::buscarPlantelPorVehiculo(string placa) {
 		}
 		actual = actual->getSig();
 	}
+	return nullptr;
 }
 string ColeccionPlantel::plantelRecomendado() {
 	if (inicio) {

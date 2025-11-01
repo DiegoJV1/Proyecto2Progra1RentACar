@@ -17,6 +17,9 @@ string Cliente::getId() { return id; }
 string Cliente::getNombre() { return nombre; }
 string Cliente::getResidencia() { return residencia; }
 int Cliente::getCantidadDeSolicitudes() { return contador; }
+void Cliente::reiniciarContador() {
+	this->contador = 0; 
+}
 string Cliente::toString() {
 	stringstream ss;
 	ss << "Nombre: " << nombre << endl;

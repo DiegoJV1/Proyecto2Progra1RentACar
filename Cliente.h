@@ -14,7 +14,7 @@ public:
 	void setId(string id);
 	void setNombre(string nom);
 	void setResidencia(string resi);
-
+	void reiniciarContador();
 	void aumentaContador();
 	string getId();
 	string getNombre();

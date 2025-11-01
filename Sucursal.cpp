@@ -141,10 +141,12 @@ string Sucursal::recomendacionDePlantel() {
 void Sucursal::modificarContadorClientes() {
 	clientes->ubicarInicio();
 	while (clientes->getObjActual()) {
+		clientes->getObjActual()->reiniciarContador();
+
 		contratos->ubicarInicio();
 		while (contratos->getObjActual()) {
 			if (contratos->getObjActual()->getIdCliente() == clientes->getObjActual()->getId()) {
-				clientes->getCliente(clientes->getObjActual()->getId())->aumentaContador();
+				clientes->getObjActual()->aumentaContador();
 			}
 			contratos->ubicarSig();
 		}

@@ -67,23 +67,28 @@ Cliente* ColeccionCliente::getCliente(string id) {
 }
 
 void ColeccionCliente::OrdenarClientes() {
-	if (inicio == nullptr)return;
+	if (inicio == nullptr) return;
+
 	NodoCliente* nuevoInicio = nullptr;
 	actual = inicio;
 	while (actual) {
 		NodoCliente* siguiente = actual->getSig();
-		if (!nuevoInicio || nuevoInicio->getObj()->getCantidadDeSolicitudes() < actual->getObj()->getCantidadDeSolicitudes()) {
+
+		if (!nuevoInicio || actual->getObj()->getCantidadDeSolicitudes() > nuevoInicio->getObj()->getCantidadDeSolicitudes()) {
 			actual->setSig(nuevoInicio);
 			nuevoInicio = actual;
 		}
 		else {
-			NodoCliente* s = nuevoInicio;
-			while (s->getSig() && s->getSig()->getObj()->getCantidadDeSolicitudes() <= actual->getObj()->getCantidadDeSolicitudes()) {
-				s = s->getSig();
+			NodoCliente* anterior = nuevoInicio;
+			NodoCliente* nuevoActual = nuevoInicio->getSig();
+			while (nuevoActual && nuevoActual->getObj()->getCantidadDeSolicitudes() >= actual->getObj()->getCantidadDeSolicitudes()) {
+				anterior = nuevoActual;
+				nuevoActual = nuevoActual->getSig();
 			}
-			actual->setSig(s->getSig());
-			s->setSig(actual);
+			actual->setSig(nuevoActual);
+			anterior->setSig(actual);
 		}
+
 		actual = siguiente;
 	}
 	inicio = nuevoInicio;
