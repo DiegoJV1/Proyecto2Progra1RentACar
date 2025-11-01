@@ -29,14 +29,17 @@ string ColeccionEstado::getUltimo() {
 string ColeccionEstado::toString() {
 	stringstream ss;
 	ss << "Bitacora de Estados: " << endl;
-	actual = inicio;
-	int i = 0;
-	while (actual) {
-		ss << "Estado #" << i << ":" << endl;
-		ss << actual->toString() << endl;
-		actual = actual->getSig();
-		i++;
+	if (inicio) {
+		actual = inicio;
+		int i = 0;
+		while (actual) {
+			ss << "Estado #" << i << ":" << endl;
+			ss << actual->toString() << endl;
+			actual = actual->getSig();
+			i++;
+		}
 	}
+	else { ss << "NULO" << endl; }
 	return ss.str();
 }
 

@@ -1,11 +1,10 @@
 #include "Vehiculo.h"
 #include<sstream>
 Vehiculo::Vehiculo() : placa(""), modelo(""), marca(""), ubiPlantel(""), categoria(""), tipoLicencia(""), estado(""), PrecioAlquiler(0.0) {
-
 	bitacoraEstado = new ColeccionEstado();
+	setEstado('A', nullptr, nullptr);
 }
 Vehiculo::Vehiculo(string placa, string modelo, string marca, char cat, string lic) : placa(placa), modelo(modelo), marca(marca), tipoLicencia(lic) {
-
 	bitacoraEstado = new ColeccionEstado();
 	setCategoria(cat);
 	setEstado('A', nullptr, nullptr);

@@ -356,6 +356,7 @@ void Menu::ejecutar() {
 				cout << "3-Reubicacion de Vehiculo (dentro de su sucursal)" << endl;
 				cout << "4-Visualizacion de los estacionamientos" << endl;
 				cout << "5-Cambio de Estado de un Vehiculo" << endl;
+				cout << "6-Reubiacion de Vehiculo(de una sucursal a otra)" << endl;
 				cout << "7-Volver" << endl;
 				cout << "Digite el numero de la opcion seleccionada:" << endl;
 				cin >> opcion2;
@@ -685,6 +686,90 @@ void Menu::ejecutar() {
 						system("cls");
 						break;
 					}
+				}
+				case 6: {
+					cout << "----Reubicacion de Vehiculo (de una sucursal a otra)----" << endl;
+					string num1;
+					cout << "Digite el codigo de la Sucursal en la que se encuentra el vehiculo: " << endl;
+					cin >> num1;
+					if (negocio->getSucurales()->buscarSucursal(num1) == false) {
+						cout << "ERROR-Sucursal no existente" << endl;
+						system("pause");
+						system("cls");
+						break;
+					}
+					else {
+						string placa;
+						cout << "Digite la placa del Vehiculo a reubicar: " << endl;
+						cin >> placa;
+						if (negocio->getSucurales()->getSucursal(num1)->getVehiculo(placa)) {
+							if (negocio->getSucurales()->getSucursal(num1)->getVehiculo(placa)->getEstado() != "Alquilado") {
+								Vehiculo* cambio = negocio->getSucurales()->getSucursal(num1)->getVehiculo(placa);
+								string ide1;
+								cout << "Digite el codigo del Plantel en el que se encuentra el vehiculo a reubicar: " << endl;
+								cin >> ide1;
+								if (negocio->getSucurales()->getSucursal(num1)->getPlantel(ide1)) {
+									string num2;
+									cout << "Digite el numero de la sucursal al que se le desea insertar el vehiculo: " << endl;
+									cin >> num2;
+									if (negocio->getSucurales()->buscarSucursal(num2) == false) {
+										cout << "ERROR-Sucursal no existente" << endl;
+										system("pause");
+										system("cls");
+										break;
+									}
+									string ide2;
+									cout << "Plantel Recomenado: " << endl;
+									cout << negocio->getSucurales()->getSucursal(num2)->recomendacionDePlantel() << endl;
+									do {
+										cout << "Digite el codigo del plantel: " << endl;
+										cin >> ide2;
+									} while (!negocio->getSucurales()->getSucursal(num2)->getPlantel(ide2));
+									if (negocio->getSucurales()->getSucursal(num2)->getPlantel(ide2)) {
+										cout << "Estacionamientos recomendados: " << endl;
+										cout << negocio->getSucurales()->getSucursal(num2)->getPlantel(ide2)->recomendacionDeEstacionamiento() << endl;
+										int ubi1, ubi2;
+										cout << "Digite el indice de la fila del estacionamiento: " << endl;
+										cin >> ubi1;
+										cout << "Digite el indice de la columna del estacionamiento: " << endl;
+										cin >> ubi2;
+										negocio->getSucurales()->getSucursal(num2)->getPlantel(ide2)->insertarVehiculo(cambio, ubi1, ubi2);
+										negocio->getSucurales()->getSucursal(num2)->getVehiculos()->insertarVehiculo(cambio);
+										negocio->getSucurales()->getSucursal(num1)->getPlantel(ide1)->buscarEstacionamientoPorVehiculo(cambio->getPlaca())->setV(nullptr);
+										negocio->getSucurales()->getSucursal(num1)->eliminarVehiculo(cambio->getPlaca());
+										system("pause");
+										system("cls");
+										break;
+									}
+									else {
+										cout << "ERROR-Plantel no existente" << endl;
+										system("pause");
+										system("cls");
+										break;
+									}
+								}
+								else {
+									cout << "ERROR-Plantel no existente" << endl;
+									system("pause");
+									system("cls");
+									break;
+								}
+							}
+							else {
+								cout << "ERROR-Vehiculo Alquilado" << endl;
+								system("pause");
+								system("cls");
+								break;
+							}
+						}
+						else {
+							cout << "ERROR-Vehiculo no existente" << endl;
+							system("pause");
+							system("cls");
+							break;
+						}
+					}
+					break;
 				}
 				break;
 				}

@@ -20,20 +20,24 @@ int main() {
     empresa->setNombre("Renta A Car");
 
     //para probar
-    /*
+    
     Fecha* f = new Fecha(1, 2, 2020);
     Colaborador* t1 = new Colaborador("789", "f", f);
-    Cliente* c1 = new Cliente("456", "h", "h","f");
+    Cliente* c1 = new Cliente("456", "h", "h");
     Plantel* p1 = new Plantel("A", 1, 3, 4);
+    Plantel* p2 = new Plantel("A", 1, 5, 6);
     Sucursal* nueva = new Sucursal("H", "123");
+    Sucursal* nueva2 = new Sucursal("A", "321");
     nueva->insertarCliente(c1);
     nueva->insertarColaborador(t1);
     Vehiculo* carro = new Vehiculo("0", "f", "t", 'A', "B1");
     p1->insertarVehiculo(carro, 0, 0);
     nueva->insertarPlantel(p1);
     nueva->insertarVehiculo(carro);
+    nueva2->insertarPlantel(p2);
     empresa->insertarSucursal(nueva);
-    */
+    empresa->insertarSucursal(nueva2);
+    
 
 
 	//Las sucursales el codigo de las sucursales son del 1 al 10, y se llaman en el menu con ese numero
