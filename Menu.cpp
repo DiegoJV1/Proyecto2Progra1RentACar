@@ -137,7 +137,6 @@ void Menu::ejecutar() {
 									string nom, ced, resi;
 									cout << "Digite el nombre del cliente: " << endl;
 									getline(cin, nom);
-									cin.ignore();
 									cout << "Digite la identificacion del cliente: " << endl;
 									cin >> ced;
 									if (negocio->getSucurales()->getSucursal(num)->getCliente(ced)) {
